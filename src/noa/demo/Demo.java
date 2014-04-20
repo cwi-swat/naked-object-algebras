@@ -25,7 +25,8 @@ public class Demo {
 
 	
 	public static void main(String[] args) {
-		Builder builder = parse("1 + 2 + 3 + [1,2,3]", Builder.builderBuilder(ExpAlg.class));
+		String src = "1 + 2 * 3 + [1,2,3]";
+		Builder builder = parse(src, Builder.builderBuilder(ExpAlg.class));
 		
 		IEval eval = builder.build(new Eval());
 		System.out.println(eval.eval());
@@ -34,10 +35,10 @@ public class Demo {
 		System.out.println(print.print());
 		
 		
-		eval = parse("1 + 2 + 3 + [1,2,3]", new Eval());
+		eval = parse(src, new Eval());
 		System.out.println(eval.eval());
 		
-		print = parse("1 + 2 + 3 + [1,2,3]", new Print());
+		print = parse(src, new Print());
 		System.out.println(print.print());
 	}
 }

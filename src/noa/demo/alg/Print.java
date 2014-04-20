@@ -7,7 +7,7 @@ public class Print implements ExpAlg<IPrint, IPrint> {
 	@Override
 	public IPrint add(IPrint l, IPrint r) {
 		return new IPrint() {
-			
+
 			@Override
 			public String print() {
 				return l.print() + " + " + r.print();
@@ -18,7 +18,7 @@ public class Print implements ExpAlg<IPrint, IPrint> {
 	@Override
 	public IPrint lit(int n) {
 		return new IPrint() {
-			
+
 			@Override
 			public String print() {
 				return "" + n;
@@ -29,7 +29,7 @@ public class Print implements ExpAlg<IPrint, IPrint> {
 	@Override
 	public IPrint start(IPrint e) {
 		return new IPrint() {
-			
+
 			@Override
 			public String print() {
 				return e.print();
@@ -40,11 +40,11 @@ public class Print implements ExpAlg<IPrint, IPrint> {
 	@Override
 	public IPrint list(List<IPrint> es) {
 		return new IPrint() {
-			
+
 			@Override
 			public String print() {
 				String s = "[";
-				for (IPrint e: es) {
+				for (IPrint e : es) {
 					s += e.print();
 					s += ", ";
 				}
@@ -53,6 +53,17 @@ public class Print implements ExpAlg<IPrint, IPrint> {
 				}
 				s += "]";
 				return s;
+			}
+		};
+	}
+
+	@Override
+	public IPrint mul(IPrint l, IPrint r) {
+		return new IPrint() {
+
+			@Override
+			public String print() {
+				return l.print() + " * " + r.print();
 			}
 		};
 	}
