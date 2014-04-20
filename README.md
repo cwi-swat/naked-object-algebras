@@ -11,7 +11,7 @@ Currently, the default way is to import the project into Eclipse. Requires Java 
 
 See package `noa.demo`:
 
-- `noa.demo.alg`: how to write object algebras with concrete syntax annotations.
+- `noa.demo.alg.ExpAlg`: how to write object algebras with concrete syntax annotations.
 - `noa.demo.syn.Tokens`: how to specify lexical syntax.
 - `noa.demo.DemoPGen`: how to generate a parser.
 - `noa.demo.Demo`: how to use the generated parser (two ways).
