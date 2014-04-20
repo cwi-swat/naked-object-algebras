@@ -38,16 +38,18 @@ public class Eval implements ExpAlg<IEval, IEval> {
 	}
 
 	@Override
-	public IEval list(List<IEval> es) {
+	public IEval avg(List<IEval> es) {
 		return new IEval() {
 
 			@Override
 			public int eval() {
 				int n = 0;
+				int i = 0;
 				for (IEval e : es) {
 					n += e.eval();
+					i++;
 				}
-				return n;
+				return n / i;
 			}
 		};
 	}

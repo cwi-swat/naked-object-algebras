@@ -38,20 +38,20 @@ public class Print implements ExpAlg<IPrint, IPrint> {
 	}
 
 	@Override
-	public IPrint list(List<IPrint> es) {
+	public IPrint avg(List<IPrint> es) {
 		return new IPrint() {
 
 			@Override
 			public String print() {
-				String s = "[";
+				String s = "avg(";
 				for (IPrint e : es) {
 					s += e.print();
 					s += ", ";
 				}
-				if (!s.equals("[")) {
+				if (!s.equals("avg(")) {
 					s = s.substring(0, s.length() - 2);
 				}
-				s += "]";
+				s += ")";
 				return s;
 			}
 		};

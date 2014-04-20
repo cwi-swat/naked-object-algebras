@@ -23,22 +23,29 @@ public class Demo {
 		return (X) parser.p()._p;
 	}
 
-	
-	public static void main(String[] args) {
-		String src = "1 + 2 * 3 + [1,2,3]";
+	private static void testBuilder(String src) {
+		System.out.println("## Using builder");
 		Builder builder = parse(src, Builder.builderBuilder(ExpAlg.class));
-		
 		IEval eval = builder.build(new Eval());
-		System.out.println(eval.eval());
+		System.out.println("eval " + src + " = " + eval.eval());
 		
 		IPrint print = builder.build(new Print());
-		System.out.println(print.print());
+		System.out.println("print " + src + " = " + print.print());
+	}
+	
+	private static void testParse(String src) {
+		System.out.println("## Using algebras directly");
+		IEval eval = parse(src, new Eval());
+		System.out.println("eval " + src + " = " + eval.eval());
 		
-		
-		eval = parse(src, new Eval());
-		System.out.println(eval.eval());
-		
-		print = parse(src, new Print());
-		System.out.println(print.print());
+		IPrint print = parse(src, new Print());
+		System.out.println("print" + src + " = " + print.print());
+	}
+	
+	public static void main(String[] args) {
+		testBuilder("1 + 2 * 3 ");
+		testBuilder("avg(1,2,3)");
+		testParse("1 + 2 * 3 ");
+		testParse("avg(1,2,3)");
 	}
 }

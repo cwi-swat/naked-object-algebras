@@ -18,9 +18,9 @@ public class DemoParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		T__4=1, T__3=2, T__2=3, T__1=4, T__0=5, WS=6, NUM=7;
+		T__5=1, T__4=2, T__3=3, T__2=4, T__1=5, T__0=6, WS=7, NUM=8;
 	public static final String[] tokenNames = {
-		"<INVALID>", "'*'", "'+'", "'['", "','", "']'", "WS", "NUM"
+		"<INVALID>", "'avg'", "'('", "')'", "'*'", "'+'", "','", "WS", "NUM"
 	};
 	public static final int
 		RULE_p = 0, RULE_e = 1;
@@ -47,16 +47,16 @@ public class DemoParser extends Parser {
 	private noa.demo.alg.ExpAlg builder;
 	public void setBuilder(noa.demo.alg.ExpAlg builder) { this.builder = builder; }
 	private static <X> java.util.List<X> lift(String name, java.util.List<?> ctxs, X ...heads) {
-	 java.util.List<X> l = new java.util.ArrayList<X>();
-	 for (X h: heads) { l.add(h); }
-		for (Object ctx: ctxs) {
-			try {
-				l.add((X)ctx.getClass().getField(name).get(ctx));
-			} catch (Throwable e) {
-				throw new RuntimeException(e);
-			}
-		}
-		return l;
+	  java.util.List<X> l = new java.util.ArrayList<X>();
+	  for (X h: heads) { l.add(h); }
+	  for (Object ctx: ctxs) {
+	    try {
+	      l.add((X)ctx.getClass().getField(name).get(ctx));
+	    } catch (Throwable e) {
+	      throw new RuntimeException(e);
+	    }
+	  }
+	  return l;
 	}
 
 	public DemoParser(TokenStream input) {
@@ -99,9 +99,9 @@ public class DemoParser extends Parser {
 	public static class EContext extends ParserRuleContext {
 		public java.lang.Object _e;
 		public EContext e_0;
+		public Token NUM_0;
 		public EContext e;
 		public List<EContext> e_0tail = new ArrayList<EContext>();
-		public Token NUM_0;
 		public EContext e_1;
 		public List<EContext> e() {
 			return getRuleContexts(EContext.class);
@@ -132,44 +132,45 @@ public class DemoParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(22);
+			setState(23);
 			switch (_input.LA(1)) {
-			case 3:
+			case NUM:
 				{
-				setState(8); match(3);
+				setState(8); ((EContext)_localctx).NUM_0 = match(NUM);
+				((EContext)_localctx)._e =  (java.lang.Object)builder.lit(num((((EContext)_localctx).NUM_0!=null?((EContext)_localctx).NUM_0.getText():null)));
+				}
+				break;
+			case 1:
 				{
-				setState(9); ((EContext)_localctx).e_0 = e(0);
-				setState(14);
+				setState(10); match(1);
+				setState(11); match(2);
+				{
+				setState(12); ((EContext)_localctx).e_0 = e(0);
+				setState(17);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-				while (_la==4) {
+				while (_la==6) {
 					{
 					{
-					setState(10); match(4);
-					setState(11); ((EContext)_localctx).e = e(0);
+					setState(13); match(6);
+					setState(14); ((EContext)_localctx).e = e(0);
 					((EContext)_localctx).e_0tail.add(((EContext)_localctx).e);
 					}
 					}
-					setState(16);
+					setState(19);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
 				}
-				setState(17); match(5);
-				((EContext)_localctx)._e =  (java.lang.Object)builder.list(lift("_e", ((EContext)_localctx).e_0tail, ((EContext)_localctx).e_0._e));
-				}
-				break;
-			case NUM:
-				{
-				setState(20); ((EContext)_localctx).NUM_0 = match(NUM);
-				((EContext)_localctx)._e =  (java.lang.Object)builder.lit(num((((EContext)_localctx).NUM_0!=null?((EContext)_localctx).NUM_0.getText():null)));
+				setState(20); match(3);
+				((EContext)_localctx)._e =  (java.lang.Object)builder.avg(lift("_e", ((EContext)_localctx).e_0tail, ((EContext)_localctx).e_0._e));
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(36);
+			setState(37);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,3,_ctx);
 			while ( _alt!=2 && _alt!=ATN.INVALID_ALT_NUMBER ) {
@@ -177,17 +178,17 @@ public class DemoParser extends Parser {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
 					{
-					setState(34);
+					setState(35);
 					switch ( getInterpreter().adaptivePredict(_input,2,_ctx) ) {
 					case 1:
 						{
 						_localctx = new EContext(_parentctx, _parentState);
 						_localctx.e_0 = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_e);
-						setState(24);
+						setState(25);
 						if (!(precpred(_ctx, 2))) throw new FailedPredicateException(this, "precpred(_ctx, 2)");
-						setState(25); match(1);
-						setState(26); ((EContext)_localctx).e_1 = e(3);
+						setState(26); match(4);
+						setState(27); ((EContext)_localctx).e_1 = e(3);
 						((EContext)_localctx)._e =  (java.lang.Object)builder.mul((java.lang.Object)(((EContext)_localctx).e_0._e),(java.lang.Object)(((EContext)_localctx).e_1._e));
 						}
 						break;
@@ -197,17 +198,17 @@ public class DemoParser extends Parser {
 						_localctx = new EContext(_parentctx, _parentState);
 						_localctx.e_0 = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_e);
-						setState(29);
+						setState(30);
 						if (!(precpred(_ctx, 1))) throw new FailedPredicateException(this, "precpred(_ctx, 1)");
-						setState(30); match(2);
-						setState(31); ((EContext)_localctx).e_1 = e(2);
+						setState(31); match(5);
+						setState(32); ((EContext)_localctx).e_1 = e(2);
 						((EContext)_localctx)._e =  (java.lang.Object)builder.add((java.lang.Object)(((EContext)_localctx).e_0._e),(java.lang.Object)(((EContext)_localctx).e_1._e));
 						}
 						break;
 					}
 					} 
 				}
-				setState(38);
+				setState(39);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,3,_ctx);
 			}
@@ -240,18 +241,18 @@ public class DemoParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\t*\4\2\t\2\4\3\t"+
-		"\3\3\2\3\2\3\2\3\3\3\3\3\3\3\3\3\3\7\3\17\n\3\f\3\16\3\22\13\3\3\3\3\3"+
-		"\3\3\3\3\3\3\5\3\31\n\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\7\3%\n"+
-		"\3\f\3\16\3(\13\3\3\3\2\3\4\4\2\4\2\2+\2\6\3\2\2\2\4\30\3\2\2\2\6\7\5"+
-		"\4\3\2\7\b\b\2\1\2\b\3\3\2\2\2\t\n\b\3\1\2\n\13\7\5\2\2\13\20\5\4\3\2"+
-		"\f\r\7\6\2\2\r\17\5\4\3\2\16\f\3\2\2\2\17\22\3\2\2\2\20\16\3\2\2\2\20"+
-		"\21\3\2\2\2\21\23\3\2\2\2\22\20\3\2\2\2\23\24\7\7\2\2\24\25\b\3\1\2\25"+
-		"\31\3\2\2\2\26\27\7\t\2\2\27\31\b\3\1\2\30\t\3\2\2\2\30\26\3\2\2\2\31"+
-		"&\3\2\2\2\32\33\f\4\2\2\33\34\7\3\2\2\34\35\5\4\3\5\35\36\b\3\1\2\36%"+
-		"\3\2\2\2\37 \f\3\2\2 !\7\4\2\2!\"\5\4\3\4\"#\b\3\1\2#%\3\2\2\2$\32\3\2"+
-		"\2\2$\37\3\2\2\2%(\3\2\2\2&$\3\2\2\2&\'\3\2\2\2\'\5\3\2\2\2(&\3\2\2\2"+
-		"\6\20\30$&";
+		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\n+\4\2\t\2\4\3\t"+
+		"\3\3\2\3\2\3\2\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\7\3\22\n\3\f\3\16\3\25"+
+		"\13\3\3\3\3\3\3\3\5\3\32\n\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\7"+
+		"\3&\n\3\f\3\16\3)\13\3\3\3\2\3\4\4\2\4\2\2,\2\6\3\2\2\2\4\31\3\2\2\2\6"+
+		"\7\5\4\3\2\7\b\b\2\1\2\b\3\3\2\2\2\t\n\b\3\1\2\n\13\7\n\2\2\13\32\b\3"+
+		"\1\2\f\r\7\3\2\2\r\16\7\4\2\2\16\23\5\4\3\2\17\20\7\b\2\2\20\22\5\4\3"+
+		"\2\21\17\3\2\2\2\22\25\3\2\2\2\23\21\3\2\2\2\23\24\3\2\2\2\24\26\3\2\2"+
+		"\2\25\23\3\2\2\2\26\27\7\5\2\2\27\30\b\3\1\2\30\32\3\2\2\2\31\t\3\2\2"+
+		"\2\31\f\3\2\2\2\32\'\3\2\2\2\33\34\f\4\2\2\34\35\7\6\2\2\35\36\5\4\3\5"+
+		"\36\37\b\3\1\2\37&\3\2\2\2 !\f\3\2\2!\"\7\7\2\2\"#\5\4\3\4#$\b\3\1\2$"+
+		"&\3\2\2\2%\33\3\2\2\2% \3\2\2\2&)\3\2\2\2\'%\3\2\2\2\'(\3\2\2\2(\5\3\2"+
+		"\2\2)\'\3\2\2\2\6\23\31%\'";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

@@ -25,6 +25,6 @@ public interface ExpAlg<P, E> {
 	E lit(int n);
 	
 	// Special notation for separated lists
-	@Syntax("'[' _@','+ ']'")
-	E list(List<E> es);
+	@Syntax("'avg' '(' _@','+ ')'")
+	E avg(List<E> es);
 }
