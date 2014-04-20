@@ -24,38 +24,38 @@ public class Rules implements Conventions {
 		this.signature = signature;
 		this.rules = new HashMap<String, List<Alt>>();
 	}
-	
+
 	public void addAlt(Alt a) {
 		if (!rules.containsKey(a.getNT())) {
 			rules.put(a.getNT(), new ArrayList<>());
 		}
 		rules.get(a.getNT()).add(a);
 	}
-	
+
 	public void groupByLevel() {
-		for (String nt: rules.keySet()) {
+		for (String nt : rules.keySet()) {
 			rules.put(nt, groupByLevel(rules.get(nt)));
 		}
 	}
 
 	private List<Alt> groupByLevel(List<Alt> alts) {
 		Map<Integer, List<Alt>> leveled = new HashMap<>();
-		for (Alt a: alts) {
+		for (Alt a : alts) {
 			if (!leveled.containsKey(a.getLevel())) {
 				leveled.put(a.getLevel(), new ArrayList<>());
 			}
 			leveled.get(a.getLevel()).add(a);
 		}
-		
-		for (Integer level: leveled.keySet()) {
+
+		for (Integer level : leveled.keySet()) {
 			if (level != MAX_PRECEDENCE && leveled.get(level).size() > 1) {
 				collapseLevel(leveled, level);
 			}
 		}
-		
+
 		return sortAlternatives(leveled);
 	}
-	
+
 	private String returnType() {
 		return carrier.getName();
 	}
@@ -63,8 +63,8 @@ public class Rules implements Conventions {
 	private void collapseLevel(Map<Integer, List<Alt>> leveled, Integer level) {
 		NormalAlt last = null;
 		Map<String, String> map = new HashMap<>();
-		for (Alt ia: leveled.get(level)) {
-			NormalAlt a = (NormalAlt)ia;
+		for (Alt ia : leveled.get(level)) {
+			NormalAlt a = (NormalAlt) ia;
 			assertValidInfix(last, a);
 			last = a;
 			map.put(a.getOperator(), a.getCons());
@@ -74,42 +74,46 @@ public class Rules implements Conventions {
 
 	private List<Alt> sortAlternatives(Map<Integer, List<Alt>> leveled) {
 		List<Alt> all = new ArrayList<>();
-		for (Integer level: leveled.keySet()) {
+		for (Integer level : leveled.keySet()) {
 			all.addAll(leveled.get(level));
 		}
-		Alt[] array = all.toArray(new Alt[]{});
+		Alt[] array = all.toArray(new Alt[] {});
 		Arrays.sort(array);
 		return Arrays.asList(array);
 	}
 
 	private void assertValidInfix(NormalAlt last, NormalAlt a) {
 		if (!a.isInfix()) {
-			throw new RuntimeException("Cannot have non-infix prods at same level of precedence");
+			throw new RuntimeException(
+					"Cannot have non-infix prods at same level of precedence");
 		}
 		if (last != null) {
-			if (!last.getLhs().equals(a.getLhs()) || !last.getRhs().equals(a.getRhs())) {
-				throw new RuntimeException("Infix prods at same level should have same lhs and rhs");
+			if (!last.getLhs().equals(a.getLhs())
+					|| !last.getRhs().equals(a.getRhs())) {
+				throw new RuntimeException(
+						"Infix prods at same level should have same lhs and rhs");
 			}
 		}
 		if (!a.getLhs().equals(a.getNT()) || !a.getRhs().equals(a.getNT())) {
-			throw new RuntimeException("Lhs/rhs must be same as result non-terminal");
+			throw new RuntimeException(
+					"Lhs/rhs must be same as result non-terminal");
 		}
 	}
-	
+
 	public void generate(StringBuilder sb) {
-		sb.append("grammar " + name + ";\n"); 
+		sb.append("grammar " + name + ";\n");
 		addHeader(sb);
 		addParserMembers(sb);
 
-		for (String nt: rules.keySet()) {
-			sb.append(nt + " returns [" + returnType() + " " + returnVariable(nt) + "]:\n");
+		for (String nt : rules.keySet()) {
+			sb.append(nt + " returns [" + returnType() + " "
+					+ returnVariable(nt) + "]:\n");
 			List<Alt> ntAlts = rules.get(nt);
 			int numOfAlts = ntAlts.size();
 			for (int i = 0; i < numOfAlts; i++) {
 				if (i != 0) {
 					sb.append("  | ");
-				}
-				else {
+				} else {
 					sb.append("    ");
 				}
 				sb.append(ntAlts.get(i) + "\n");
@@ -121,26 +125,27 @@ public class Rules implements Conventions {
 	private void addParserMembers(StringBuilder sb) {
 		sb.append("@parser::members{\n");
 		sb.append("private " + signature.getName() + " " + BUILDER + ";\n");
-		sb.append("public void setBuilder(" + signature.getName() + " " + BUILDER + ") { this." + BUILDER + " = " + BUILDER + "; }\n");
-		
+		sb.append("public void setBuilder(" + signature.getName() + " "
+				+ BUILDER + ") { this." + BUILDER + " = " + BUILDER + "; }\n");
+
 		addLiftMethod(sb);
-		
+
 		sb.append("}\n");
 	}
 
 	private void addLiftMethod(StringBuilder sb) {
 		sb.append("private static <X> java.util.List<X> lift(String name, java.util.List<?> ctxs, X ...heads) {\n");
-		sb.append(" java.util.List<X> l = new java.util.ArrayList<X>();\n");
-		sb.append(" for (X h: heads) { l.add(h); }\n");
-		sb.append("	for (Object ctx: ctxs) {\n");
-		sb.append("		try {\n");
-		sb.append("			l.add((X)ctx.getClass().getField(name).get(ctx));\n");
-		sb.append("		} catch (Throwable e) {\n");
-		sb.append("			throw new RuntimeException(e);\n");
-		sb.append("		}\n");
-		sb.append("	}\n");
-		sb.append("	return l;\n");
-		sb.append("}\n");		
+		sb.append("  java.util.List<X> l = new java.util.ArrayList<X>();\n");
+		sb.append("  for (X h: heads) { l.add(h); }\n");
+		sb.append("  for (Object ctx: ctxs) {\n");
+		sb.append("    try {\n");
+		sb.append("      l.add((X)ctx.getClass().getField(name).get(ctx));\n");
+		sb.append("    } catch (Throwable e) {\n");
+		sb.append("      throw new RuntimeException(e);\n");
+		sb.append("    }\n");
+		sb.append("  }\n");
+		sb.append("  return l;\n");
+		sb.append("}\n");
 	}
 
 	private void addHeader(StringBuilder sb) {
@@ -149,5 +154,5 @@ public class Rules implements Conventions {
 		sb.append("import static " + tokens.getName() + ".*;\n");
 		sb.append("}\n");
 	}
-	
+
 }
