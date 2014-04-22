@@ -42,24 +42,24 @@ public class InfixAlt extends Alt {
 		String exp = "null";
 		for (String token: tokenConsMap.keySet()) {
 			assert isLiteral(token);
-			exp = tokenCondition(label, token) + " ? "  + buildExp(l1, l2, token) + " : " + exp + ")";
+			exp = tokenCondition(label, token) + " ? "  + buildExp(l1, l2, token) + " : " + exp;
 		}
 		return exp;
 	}
 
 
 	private String buildExp(String l1, String l2, String token) {
-		return BUILDER_FIELD + "." + tokenConsMap.get(token) + buildArg(l1) + ", " + buildArg(l2) + ")";
+		return BUILDER_FIELD + "." + tokenConsMap.get(token) + "(" + buildArg(l1) + ", " + buildArg(l2) + ")";
 	}
 
 
 	private String buildArg(String l1) {
-		return "($" + l1 + "." + returnVariable(getNT()) + ")";
+		return "$" + l1 + "." + returnVariable(getNT());
 	}
 
 
 	private String tokenCondition(String label, String token) {
-		return "($" + label + ".text.equals(\"" + token.substring(1, token.length() - 1) + "\")";
+		return "$" + label + ".text.equals(\"" + token.substring(1, token.length() - 1) + "\")";
 	}
 
 }
