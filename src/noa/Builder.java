@@ -81,12 +81,9 @@ public class Builder {
 	}
 
 	private boolean hasMethod(Object factory) {
-		System.out.println("FACTORY = " + factory.getClass().getName());
 		Method[] methods = factory.getClass().getMethods();
 		for (Method m : methods)  {
 			// TODO: check argument types too?
-			System.out.println("Is " + m.getName() + " equal to " + method.getName());
-			System.out.println("  and is " + m.getParameterCount() + " equal to " + method.getParameterCount());
 			if (m.getName().equals(method.getName()) && m.getParameterCount() == method.getParameterCount()) {
 				return true;
 			}
