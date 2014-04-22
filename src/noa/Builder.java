@@ -5,7 +5,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Builder {
@@ -37,10 +36,10 @@ public class Builder {
 		for (int i = 0; i < args.length; i++) {
 			builtArgs[i] = buildArgument(args[i], algebras);
 		}
-		return (T) invokeOnAlgebra(Arrays.asList(algebras), builtArgs);
+		return (T) invokeOnAlgebra(algebras, builtArgs);
 	}
 
-	private Object buildArgument(Object arg, Object ...algebras) {
+	private static Object buildArgument(Object arg, Object ...algebras) {
 		if (arg instanceof List<?>){
 			return buildList((List<?>) arg, algebras);
 		}
@@ -50,11 +49,11 @@ public class Builder {
 		return arg;
 	}
 
-	private Object buildObject(Builder arg, Object ...algebras) {
+	private static Object buildObject(Builder arg, Object[] algebras) {
 		return arg.build(algebras);
 	}
 
-	private List<Object> buildList(List<?> argList, Object ...algebras) {
+	private static List<Object> buildList(List<?> argList, Object[] algebras) {
 		List<Object> args = new ArrayList<Object>();
 		for (Object arg : argList){
 			if (arg instanceof Builder){
@@ -67,7 +66,7 @@ public class Builder {
 		return args;
 	}
 
-	private Object invokeOnAlgebra(List<Object> algebras, Object[] args) {
+	private Object invokeOnAlgebra(Object[] algebras, Object[] args) {
 		for (Object factory : algebras){
 			if (hasMethod(factory)) {
 				try {
@@ -78,13 +77,16 @@ public class Builder {
 				}
 			}
 		}
-		throw new UnsupportedOperationException("method was not found in algebras: " + method.getName());
+		throw new UnsupportedOperationException("method was not found in algebras: " + method.getName() + "/" + method.getParameterCount());
 	}
 
 	private boolean hasMethod(Object factory) {
+		System.out.println("FACTORY = " + factory.getClass().getName());
 		Method[] methods = factory.getClass().getMethods();
 		for (Method m : methods)  {
 			// TODO: check argument types too?
+			System.out.println("Is " + m.getName() + " equal to " + method.getName());
+			System.out.println("  and is " + m.getParameterCount() + " equal to " + method.getParameterCount());
 			if (m.getName().equals(method.getName()) && m.getParameterCount() == method.getParameterCount()) {
 				return true;
 			}
