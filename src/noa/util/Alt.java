@@ -3,10 +3,8 @@ package noa.util;
 public abstract class Alt implements Comparable<Alt>, Conventions {
 	private String nt;
 	private int prec;
-	private String returnType;
 	
-	public Alt(String returnType, String nt, int prec) {
-		this.returnType = returnType;
+	public Alt(String nt, int prec) {
 		this.nt = nt;
 		this.prec = prec;
 	}
@@ -19,10 +17,6 @@ public abstract class Alt implements Comparable<Alt>, Conventions {
 		return nt;
 	}
 	
-	public String returnType() {
-		return returnType;
-	}
-
 	@Override
 	public int compareTo(Alt o) {
 		return new Integer(o.getLevel()).compareTo(getLevel());

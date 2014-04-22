@@ -10,10 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.antlr.v4.Tool;
-import org.antlr.v4.tool.Grammar;
-import org.antlr.v4.tool.ast.GrammarRootAST;
-
 import noa.annos.Level;
 import noa.annos.Skip;
 import noa.annos.Syntax;
@@ -21,6 +17,10 @@ import noa.annos.Token;
 import noa.util.Conventions;
 import noa.util.NormalAlt;
 import noa.util.Rules;
+
+import org.antlr.v4.Tool;
+import org.antlr.v4.tool.Grammar;
+import org.antlr.v4.tool.ast.GrammarRootAST;
 
 
 /*
@@ -32,17 +32,15 @@ import noa.util.Rules;
 public class PGen {
 	private Class<?> signature;
 	private Class<?> tokensClass;
-	private Class<?> carrier;
 
-	public PGen(Class<?> tokens, Class<?> carrier, Class<?> signature) {
+	public PGen(Class<?> tokens, Class<?> signature) {
 		this.tokensClass = tokens;
-		this.carrier = carrier;
 		this.signature = signature;
 	}
 	
 	public void generate(String name, String pkg, String path) {
 		Map<String,String> tokens = new HashMap<>();
-		Rules rules = new Rules(name, pkg, tokensClass, carrier, signature);
+		Rules rules = new Rules(name, pkg, tokensClass, signature);
 		addProductions(rules);
 		
 		StringBuilder sb = new StringBuilder();
@@ -109,15 +107,10 @@ public class PGen {
 			if (precAnno != null) {
 				prec = precAnno.value();
 			}
-			rules.addAlt(new NormalAlt(returnType(), typeToNonTerminal(ret), prec, m.getName(), realSyms));
+			rules.addAlt(new NormalAlt(typeToNonTerminal(ret), prec, m.getName(), realSyms));
 		}
 	}
 
-		
-	// TODO: fix this duplication (merge PGen and Rules?)
-	private String returnType() {
-		return carrier.getName();
-	}
 
 	private String typeToNonTerminal(Type t) {
 		String typeName = t.getTypeName();

@@ -64,7 +64,7 @@ public class DemoParser extends Parser {
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 	public static class PContext extends ParserRuleContext {
-		public java.lang.Object _p;
+		public Object _p;
 		public EContext e_0;
 		public EContext e() {
 			return getRuleContext(EContext.class,0);
@@ -82,7 +82,7 @@ public class DemoParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(4); ((PContext)_localctx).e_0 = e(0);
-			((PContext)_localctx)._p =  (java.lang.Object)builder.start((java.lang.Object)(((PContext)_localctx).e_0._e));
+			((PContext)_localctx)._p =  builder.start((((PContext)_localctx).e_0._e));
 			}
 		}
 		catch (RecognitionException re) {
@@ -97,11 +97,11 @@ public class DemoParser extends Parser {
 	}
 
 	public static class EContext extends ParserRuleContext {
-		public java.lang.Object _e;
+		public Object _e;
 		public EContext e_0;
-		public Token NUM_0;
 		public EContext e;
 		public List<EContext> e_0tail = new ArrayList<EContext>();
+		public Token NUM_0;
 		public EContext e_1;
 		public List<EContext> e() {
 			return getRuleContexts(EContext.class);
@@ -134,36 +134,36 @@ public class DemoParser extends Parser {
 			{
 			setState(23);
 			switch (_input.LA(1)) {
-			case NUM:
-				{
-				setState(8); ((EContext)_localctx).NUM_0 = match(NUM);
-				((EContext)_localctx)._e =  (java.lang.Object)builder.lit(num((((EContext)_localctx).NUM_0!=null?((EContext)_localctx).NUM_0.getText():null)));
-				}
-				break;
 			case 1:
 				{
-				setState(10); match(1);
-				setState(11); match(2);
+				setState(8); match(1);
+				setState(9); match(2);
 				{
-				setState(12); ((EContext)_localctx).e_0 = e(0);
-				setState(17);
+				setState(10); ((EContext)_localctx).e_0 = e(0);
+				setState(15);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==6) {
 					{
 					{
-					setState(13); match(6);
-					setState(14); ((EContext)_localctx).e = e(0);
+					setState(11); match(6);
+					setState(12); ((EContext)_localctx).e = e(0);
 					((EContext)_localctx).e_0tail.add(((EContext)_localctx).e);
 					}
 					}
-					setState(19);
+					setState(17);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
 				}
-				setState(20); match(3);
-				((EContext)_localctx)._e =  (java.lang.Object)builder.avg(lift("_e", ((EContext)_localctx).e_0tail, ((EContext)_localctx).e_0._e));
+				setState(18); match(3);
+				((EContext)_localctx)._e =  builder.avg(lift("_e", ((EContext)_localctx).e_0tail, ((EContext)_localctx).e_0._e));
+				}
+				break;
+			case NUM:
+				{
+				setState(21); ((EContext)_localctx).NUM_0 = match(NUM);
+				((EContext)_localctx)._e =  builder.lit(num((((EContext)_localctx).NUM_0!=null?((EContext)_localctx).NUM_0.getText():null)));
 				}
 				break;
 			default:
@@ -189,7 +189,7 @@ public class DemoParser extends Parser {
 						if (!(precpred(_ctx, 2))) throw new FailedPredicateException(this, "precpred(_ctx, 2)");
 						setState(26); match(4);
 						setState(27); ((EContext)_localctx).e_1 = e(3);
-						((EContext)_localctx)._e =  (java.lang.Object)builder.mul((java.lang.Object)(((EContext)_localctx).e_0._e),(java.lang.Object)(((EContext)_localctx).e_1._e));
+						((EContext)_localctx)._e =  builder.mul((((EContext)_localctx).e_0._e),(((EContext)_localctx).e_1._e));
 						}
 						break;
 
@@ -202,7 +202,7 @@ public class DemoParser extends Parser {
 						if (!(precpred(_ctx, 1))) throw new FailedPredicateException(this, "precpred(_ctx, 1)");
 						setState(31); match(5);
 						setState(32); ((EContext)_localctx).e_1 = e(2);
-						((EContext)_localctx)._e =  (java.lang.Object)builder.add((java.lang.Object)(((EContext)_localctx).e_0._e),(java.lang.Object)(((EContext)_localctx).e_1._e));
+						((EContext)_localctx)._e =  builder.add((((EContext)_localctx).e_0._e),(((EContext)_localctx).e_1._e));
 						}
 						break;
 					}
@@ -242,17 +242,17 @@ public class DemoParser extends Parser {
 
 	public static final String _serializedATN =
 		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\n+\4\2\t\2\4\3\t"+
-		"\3\3\2\3\2\3\2\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\7\3\22\n\3\f\3\16\3\25"+
-		"\13\3\3\3\3\3\3\3\5\3\32\n\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\7"+
+		"\3\3\2\3\2\3\2\3\3\3\3\3\3\3\3\3\3\3\3\7\3\20\n\3\f\3\16\3\23\13\3\3\3"+
+		"\3\3\3\3\3\3\3\3\5\3\32\n\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\7"+
 		"\3&\n\3\f\3\16\3)\13\3\3\3\2\3\4\4\2\4\2\2,\2\6\3\2\2\2\4\31\3\2\2\2\6"+
-		"\7\5\4\3\2\7\b\b\2\1\2\b\3\3\2\2\2\t\n\b\3\1\2\n\13\7\n\2\2\13\32\b\3"+
-		"\1\2\f\r\7\3\2\2\r\16\7\4\2\2\16\23\5\4\3\2\17\20\7\b\2\2\20\22\5\4\3"+
-		"\2\21\17\3\2\2\2\22\25\3\2\2\2\23\21\3\2\2\2\23\24\3\2\2\2\24\26\3\2\2"+
-		"\2\25\23\3\2\2\2\26\27\7\5\2\2\27\30\b\3\1\2\30\32\3\2\2\2\31\t\3\2\2"+
-		"\2\31\f\3\2\2\2\32\'\3\2\2\2\33\34\f\4\2\2\34\35\7\6\2\2\35\36\5\4\3\5"+
+		"\7\5\4\3\2\7\b\b\2\1\2\b\3\3\2\2\2\t\n\b\3\1\2\n\13\7\3\2\2\13\f\7\4\2"+
+		"\2\f\21\5\4\3\2\r\16\7\b\2\2\16\20\5\4\3\2\17\r\3\2\2\2\20\23\3\2\2\2"+
+		"\21\17\3\2\2\2\21\22\3\2\2\2\22\24\3\2\2\2\23\21\3\2\2\2\24\25\7\5\2\2"+
+		"\25\26\b\3\1\2\26\32\3\2\2\2\27\30\7\n\2\2\30\32\b\3\1\2\31\t\3\2\2\2"+
+		"\31\27\3\2\2\2\32\'\3\2\2\2\33\34\f\4\2\2\34\35\7\6\2\2\35\36\5\4\3\5"+
 		"\36\37\b\3\1\2\37&\3\2\2\2 !\f\3\2\2!\"\7\7\2\2\"#\5\4\3\4#$\b\3\1\2$"+
 		"&\3\2\2\2%\33\3\2\2\2% \3\2\2\2&)\3\2\2\2\'%\3\2\2\2\'(\3\2\2\2(\5\3\2"+
-		"\2\2)\'\3\2\2\2\6\23\31%\'";
+		"\2\2)\'\3\2\2\2\6\21\31%\'";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

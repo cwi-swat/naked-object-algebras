@@ -14,13 +14,11 @@ public class Rules implements Conventions {
 	private String pkg;
 	private Class<?> tokens;
 	private Class<?> signature;
-	private Class<?> carrier;
 
-	public Rules(String name, String pkg, Class<?> tokens, Class<?> carrier, Class<?> signature) {
+	public Rules(String name, String pkg, Class<?> tokens, Class<?> signature) {
 		this.name = name;
 		this.pkg = pkg;
 		this.tokens = tokens;
-		this.carrier = carrier;
 		this.signature = signature;
 		this.rules = new HashMap<String, List<Alt>>();
 	}
@@ -56,10 +54,6 @@ public class Rules implements Conventions {
 		return sortAlternatives(leveled);
 	}
 
-	private String returnType() {
-		return carrier.getName();
-	}
-
 	private void collapseLevel(Map<Integer, List<Alt>> leveled, Integer level) {
 		NormalAlt last = null;
 		Map<String, String> map = new HashMap<>();
@@ -69,7 +63,7 @@ public class Rules implements Conventions {
 			last = a;
 			map.put(a.getOperator(), a.getCons());
 		}
-		leveled.put(level, Arrays.asList(new InfixAlt(returnType(), last.getNT(), level, map)));
+		leveled.put(level, Arrays.asList(new InfixAlt(last.getNT(), level, map)));
 	}
 
 	private List<Alt> sortAlternatives(Map<Integer, List<Alt>> leveled) {
@@ -106,7 +100,7 @@ public class Rules implements Conventions {
 		addParserMembers(sb);
 
 		for (String nt : rules.keySet()) {
-			sb.append(nt + " returns [" + returnType() + " "
+			sb.append(nt + " returns [Object "
 					+ returnVariable(nt) + "]:\n");
 			List<Alt> ntAlts = rules.get(nt);
 			int numOfAlts = ntAlts.size();

@@ -7,8 +7,8 @@ import static noa.util.Conventions.*;
 public class InfixAlt extends Alt {
 	private Map<String, String> tokenConsMap;
 
-	public InfixAlt(String returnType, String nt, int prec, Map<String,String> tokenConsMap) {
-		super(returnType, nt, prec);
+	public InfixAlt(String nt, int prec, Map<String,String> tokenConsMap) {
+		super(nt, prec);
 		this.tokenConsMap = tokenConsMap;
 	}
 
@@ -33,7 +33,7 @@ public class InfixAlt extends Alt {
 		String l2 = labelFor(1, getNT());
 		prod += l2 + "=" + getNT() + " ";
 		
-		prod += " {$" + returnVariable(getNT()) + " = (" + returnType() + ")" + buildBuildExp(l1, opLabel, l2) + ";}";
+		prod += " {$" + returnVariable(getNT()) + " = " + buildBuildExp(l1, opLabel, l2) + ";}";
 		return prod;
 	}
 
@@ -54,7 +54,7 @@ public class InfixAlt extends Alt {
 
 
 	private String buildArg(String l1) {
-		return "((" + returnType() + ")($" + l1 + "." + returnVariable(getNT()) + ")";
+		return "($" + l1 + "." + returnVariable(getNT()) + ")";
 	}
 
 

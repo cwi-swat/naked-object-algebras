@@ -9,8 +9,8 @@ public class NormalAlt extends Alt implements Conventions {
 	private List<String> syms;
 	private String cons;
 
-	public NormalAlt(String returnType, String nt, int prec, String cons, List<String> syms) {
-		super(returnType, nt, prec);
+	public NormalAlt(String nt, int prec, String cons, List<String> syms) {
+		super(nt, prec);
 		this.cons = cons;
 		this.syms = syms;
 	}
@@ -43,7 +43,7 @@ public class NormalAlt extends Alt implements Conventions {
 		for (String s: syms) {
 			if (isNonTerminal(s)) {
 				prod += labelFor(labelCounter, s) + "=" + s + " ";
-				args += "(" + returnType() + ")($" + labelFor(labelCounter, s) + "." + returnVariable(s) + "),";
+				args += "($" + labelFor(labelCounter, s) + "." + returnVariable(s) + "),";
 				labelCounter += 1;
 			}
 			else if (isRegular(s)) {
@@ -77,7 +77,7 @@ public class NormalAlt extends Alt implements Conventions {
 			// remove trailing comma
 			args = args.substring(0, args.length() - 1);
 		}
-		prod += " {$" + returnVariable(getNT()) + " = (" + returnType() + ")" + BUILDER + "." + cons + "(" + args + ");}";
+		prod += " {$" + returnVariable(getNT()) + " = " + BUILDER + "." + cons + "(" + args + ");}";
 		return prod;
 	}
 
