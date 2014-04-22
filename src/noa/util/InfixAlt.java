@@ -49,7 +49,7 @@ public class InfixAlt extends Alt {
 
 
 	private String buildExp(String l1, String l2, String token) {
-		return BUILDER + "." + tokenConsMap.get(token) + buildArg(l1) + ", " + buildArg(l2) + ")";
+		return BUILDER_FIELD + "." + tokenConsMap.get(token) + buildArg(l1) + ", " + buildArg(l2) + ")";
 	}
 
 

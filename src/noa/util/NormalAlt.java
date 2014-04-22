@@ -77,7 +77,7 @@ public class NormalAlt extends Alt implements Conventions {
 			// remove trailing comma
 			args = args.substring(0, args.length() - 1);
 		}
-		prod += " {$" + returnVariable(getNT()) + " = " + BUILDER + "." + cons + "(" + args + ");}";
+		prod += " {$" + returnVariable(getNT()) + " = " + BUILDER_FIELD + "." + cons + "(" + args + ");}";
 		return prod;
 	}
 

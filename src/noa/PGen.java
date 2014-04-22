@@ -37,8 +37,12 @@ public class PGen {
 		this.tokensClass = tokens;
 		this.signature = signature;
 	}
-	
+
 	public void generate(String name, String pkg, String path) {
+		generate(name, pkg, path, false);
+	}
+
+	public void generate(String name, String pkg, String path, boolean log) {
 		Map<String,String> tokens = new HashMap<>();
 		Rules rules = new Rules(name, pkg, tokensClass, signature);
 		addProductions(rules);
@@ -48,7 +52,9 @@ public class PGen {
 		rules.generate(sb);
 		generateTokens(tokens, sb);
 		
-		System.out.println(sb.toString());
+		if (log) {
+			System.out.println(sb.toString());
+		}
 		
 		Tool t = new org.antlr.v4.Tool();
 		GrammarRootAST g = t.parseGrammarFromString(sb.toString());

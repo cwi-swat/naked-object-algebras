@@ -1,8 +1,7 @@
 package noa.util;
 
 public interface Conventions {
-	static final String BUILDER = "builder";
-
+	static final String BUILDER_FIELD = "builder";
 	static final int MAX_PRECEDENCE = Integer.MAX_VALUE;
 	
 	static boolean hasPlaceholder(String s) {

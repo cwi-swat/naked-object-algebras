@@ -42,23 +42,23 @@ public class Builder {
 
 	private Object buildArgument(Object arg, Object ...algebras) {
 		if (arg instanceof List<?>){
-			return builderToInterfaceList((List<?>) arg, algebras);
+			return buildList((List<?>) arg, algebras);
 		}
 		if (arg instanceof Builder){
-			return builderToInterface((Builder) arg, algebras);
+			return buildObject((Builder) arg, algebras);
 		}
 		return arg;
 	}
 
-	private Object builderToInterface(Builder arg, Object ...algebras) {
+	private Object buildObject(Builder arg, Object ...algebras) {
 		return arg.build(algebras);
 	}
 
-	private List<Object> builderToInterfaceList(List<?> argList, Object ...algebras) {
+	private List<Object> buildList(List<?> argList, Object ...algebras) {
 		List<Object> args = new ArrayList<Object>();
 		for (Object arg : argList){
 			if (arg instanceof Builder){
-				args.add(builderToInterface((Builder)arg, algebras));
+				args.add(buildObject((Builder)arg, algebras));
 			}
 			else {
 				args.add(arg);

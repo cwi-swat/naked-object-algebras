@@ -118,9 +118,9 @@ public class Rules implements Conventions {
 
 	private void addParserMembers(StringBuilder sb) {
 		sb.append("@parser::members{\n");
-		sb.append("private " + signature.getName() + " " + BUILDER + ";\n");
+		sb.append("private " + signature.getName() + " " + BUILDER_FIELD + ";\n");
 		sb.append("public void setBuilder(" + signature.getName() + " "
-				+ BUILDER + ") { this." + BUILDER + " = " + BUILDER + "; }\n");
+				+ BUILDER_FIELD + ") { this." + BUILDER_FIELD + " = " + BUILDER_FIELD + "; }\n");
 
 		addLiftMethod(sb);
 
