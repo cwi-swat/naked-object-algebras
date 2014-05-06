@@ -44,8 +44,8 @@ public class DemoParser extends Parser {
 	public ATN getATN() { return _ATN; }
 
 
-	private noa.demo.alg.ExpAlg builder;
-	public void setBuilder(noa.demo.alg.ExpAlg builder) { this.builder = builder; }
+	private noa.demo.syn.AllAlg builder;
+	public void setBuilder(noa.demo.syn.AllAlg builder) { this.builder = builder; }
 	private static <X> java.util.List<X> lift(String name, java.util.List<?> ctxs, X ...heads) {
 	  java.util.List<X> l = new java.util.ArrayList<X>();
 	  for (X h: heads) { l.add(h); }

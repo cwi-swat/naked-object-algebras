@@ -2,7 +2,7 @@ package noa.demo.alg;
 
 import java.util.List;
 
-public class Print implements ExpAlg<IPrint, IPrint> {
+public class PrintExp implements ExpAlg<IPrint> {
 
 	@Override
 	public IPrint add(IPrint l, IPrint r) {
@@ -22,17 +22,6 @@ public class Print implements ExpAlg<IPrint, IPrint> {
 			@Override
 			public String print() {
 				return "" + n;
-			}
-		};
-	}
-
-	@Override
-	public IPrint start(IPrint e) {
-		return new IPrint() {
-
-			@Override
-			public String print() {
-				return e.print();
 			}
 		};
 	}

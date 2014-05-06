@@ -2,7 +2,7 @@ package noa.demo.alg;
 
 import java.util.List;
 
-public class Eval implements ExpAlg<IEval, IEval> {
+public class EvalExp implements ExpAlg<IEval> {
 
 	@Override
 	public IEval add(IEval l, IEval r) {
@@ -22,17 +22,6 @@ public class Eval implements ExpAlg<IEval, IEval> {
 			@Override
 			public int eval() {
 				return n;
-			}
-		};
-	}
-
-	@Override
-	public IEval start(IEval e) {
-		return new IEval() {
-
-			@Override
-			public int eval() {
-				return e.eval();
 			}
 		};
 	}

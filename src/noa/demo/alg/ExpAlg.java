@@ -5,12 +5,7 @@ import java.util.List;
 import noa.annos.Level;
 import noa.annos.Syntax;
 
-public interface ExpAlg<P, E> {
-	
-	// needed because apparently ANTLR4 does not allow calling
-	// left-recursive rules directly (?)
-	@Syntax("prog = exp")
-	P start(E e);
+public interface ExpAlg<E> {
 
 	// Support for precedence annos on infix operators.
 	@Syntax("exp = exp '*' exp") @Level(20)
