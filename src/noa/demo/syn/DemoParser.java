@@ -18,14 +18,14 @@ public class DemoParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		T__5=1, T__4=2, T__3=3, T__2=4, T__1=5, T__0=6, NUM=7, WS=8;
+		T__5=1, T__4=2, T__3=3, T__2=4, T__1=5, T__0=6, WS=7, NUM=8;
 	public static final String[] tokenNames = {
-		"<INVALID>", "'avg'", "'('", "')'", "'*'", "'+'", "','", "NUM", "WS"
+		"<INVALID>", "'avg'", "'('", "')'", "'*'", "'+'", "','", "WS", "NUM"
 	};
 	public static final int
-		RULE_p = 0, RULE_e = 1;
+		RULE_exp = 0, RULE_prog = 1;
 	public static final String[] ruleNames = {
-		"p", "e"
+		"exp", "prog"
 	};
 
 	@Override
@@ -63,114 +63,81 @@ public class DemoParser extends Parser {
 		super(input);
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
-	public static class PContext extends ParserRuleContext {
-		public Object _p;
-		public EContext e_0;
-		public EContext e() {
-			return getRuleContext(EContext.class,0);
-		}
-		public PContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_p; }
-	}
-
-	public final PContext p() throws RecognitionException {
-		PContext _localctx = new PContext(_ctx, getState());
-		enterRule(_localctx, 0, RULE_p);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(4); ((PContext)_localctx).e_0 = e(0);
-			((PContext)_localctx)._p =  builder.start((((PContext)_localctx).e_0._e));
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class EContext extends ParserRuleContext {
-		public Object _e;
-		public EContext e_0;
+	public static class ExpContext extends ParserRuleContext {
+		public Object _exp;
+		public ExpContext exp_0;
 		public Token NUM_0;
-		public EContext e;
-		public List<EContext> e_0tail = new ArrayList<EContext>();
-		public EContext e_1;
-		public List<EContext> e() {
-			return getRuleContexts(EContext.class);
+		public ExpContext exp;
+		public List<ExpContext> exp_0tail = new ArrayList<ExpContext>();
+		public ExpContext exp_1;
+		public List<ExpContext> exp() {
+			return getRuleContexts(ExpContext.class);
 		}
 		public TerminalNode NUM() { return getToken(DemoParser.NUM, 0); }
-		public EContext e(int i) {
-			return getRuleContext(EContext.class,i);
+		public ExpContext exp(int i) {
+			return getRuleContext(ExpContext.class,i);
 		}
-		public EContext(ParserRuleContext parent, int invokingState) {
+		public ExpContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_e; }
+		@Override public int getRuleIndex() { return RULE_exp; }
 	}
 
-	public final EContext e() throws RecognitionException {
-		return e(0);
+	public final ExpContext exp() throws RecognitionException {
+		return exp(0);
 	}
 
-	private EContext e(int _p) throws RecognitionException {
+	private ExpContext exp(int _p) throws RecognitionException {
 		ParserRuleContext _parentctx = _ctx;
 		int _parentState = getState();
-		EContext _localctx = new EContext(_ctx, _parentState);
-		EContext _prevctx = _localctx;
-		int _startState = 2;
-		enterRecursionRule(_localctx, 2, RULE_e, _p);
+		ExpContext _localctx = new ExpContext(_ctx, _parentState);
+		ExpContext _prevctx = _localctx;
+		int _startState = 0;
+		enterRecursionRule(_localctx, 0, RULE_exp, _p);
 		int _la;
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(23);
+			setState(20);
 			switch (_input.LA(1)) {
 			case NUM:
 				{
-				setState(8); ((EContext)_localctx).NUM_0 = match(NUM);
-				((EContext)_localctx)._e =  builder.lit(num((((EContext)_localctx).NUM_0!=null?((EContext)_localctx).NUM_0.getText():null)));
+				setState(5); ((ExpContext)_localctx).NUM_0 = match(NUM);
+				((ExpContext)_localctx)._exp =  builder.lit(num((((ExpContext)_localctx).NUM_0!=null?((ExpContext)_localctx).NUM_0.getText():null)));
 				}
 				break;
 			case 1:
 				{
-				setState(10); match(1);
-				setState(11); match(2);
+				setState(7); match(1);
+				setState(8); match(2);
 				{
-				setState(12); ((EContext)_localctx).e_0 = e(0);
-				setState(17);
+				setState(9); ((ExpContext)_localctx).exp_0 = exp(0);
+				setState(14);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==6) {
 					{
 					{
-					setState(13); match(6);
-					setState(14); ((EContext)_localctx).e = e(0);
-					((EContext)_localctx).e_0tail.add(((EContext)_localctx).e);
+					setState(10); match(6);
+					setState(11); ((ExpContext)_localctx).exp = exp(0);
+					((ExpContext)_localctx).exp_0tail.add(((ExpContext)_localctx).exp);
 					}
 					}
-					setState(19);
+					setState(16);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
 				}
-				setState(20); match(3);
-				((EContext)_localctx)._e =  builder.avg(lift("_e", ((EContext)_localctx).e_0tail, ((EContext)_localctx).e_0._e));
+				setState(17); match(3);
+				((ExpContext)_localctx)._exp =  builder.avg(lift("_exp", ((ExpContext)_localctx).exp_0tail, ((ExpContext)_localctx).exp_0._exp));
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(37);
+			setState(34);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,3,_ctx);
 			while ( _alt!=2 && _alt!=ATN.INVALID_ALT_NUMBER ) {
@@ -178,37 +145,37 @@ public class DemoParser extends Parser {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
 					{
-					setState(35);
+					setState(32);
 					switch ( getInterpreter().adaptivePredict(_input,2,_ctx) ) {
 					case 1:
 						{
-						_localctx = new EContext(_parentctx, _parentState);
-						_localctx.e_0 = _prevctx;
-						pushNewRecursionContext(_localctx, _startState, RULE_e);
-						setState(25);
+						_localctx = new ExpContext(_parentctx, _parentState);
+						_localctx.exp_0 = _prevctx;
+						pushNewRecursionContext(_localctx, _startState, RULE_exp);
+						setState(22);
 						if (!(precpred(_ctx, 2))) throw new FailedPredicateException(this, "precpred(_ctx, 2)");
-						setState(26); match(4);
-						setState(27); ((EContext)_localctx).e_1 = e(3);
-						((EContext)_localctx)._e =  builder.mul((((EContext)_localctx).e_0._e),(((EContext)_localctx).e_1._e));
+						setState(23); match(4);
+						setState(24); ((ExpContext)_localctx).exp_1 = exp(3);
+						((ExpContext)_localctx)._exp =  builder.mul((((ExpContext)_localctx).exp_0._exp),(((ExpContext)_localctx).exp_1._exp));
 						}
 						break;
 
 					case 2:
 						{
-						_localctx = new EContext(_parentctx, _parentState);
-						_localctx.e_0 = _prevctx;
-						pushNewRecursionContext(_localctx, _startState, RULE_e);
-						setState(30);
+						_localctx = new ExpContext(_parentctx, _parentState);
+						_localctx.exp_0 = _prevctx;
+						pushNewRecursionContext(_localctx, _startState, RULE_exp);
+						setState(27);
 						if (!(precpred(_ctx, 1))) throw new FailedPredicateException(this, "precpred(_ctx, 1)");
-						setState(31); match(5);
-						setState(32); ((EContext)_localctx).e_1 = e(2);
-						((EContext)_localctx)._e =  builder.add((((EContext)_localctx).e_0._e),(((EContext)_localctx).e_1._e));
+						setState(28); match(5);
+						setState(29); ((ExpContext)_localctx).exp_1 = exp(2);
+						((ExpContext)_localctx)._exp =  builder.add((((ExpContext)_localctx).exp_0._exp),(((ExpContext)_localctx).exp_1._exp));
 						}
 						break;
 					}
 					} 
 				}
-				setState(39);
+				setState(36);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,3,_ctx);
 			}
@@ -225,13 +192,46 @@ public class DemoParser extends Parser {
 		return _localctx;
 	}
 
+	public static class ProgContext extends ParserRuleContext {
+		public Object _prog;
+		public ExpContext exp_0;
+		public ExpContext exp() {
+			return getRuleContext(ExpContext.class,0);
+		}
+		public ProgContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_prog; }
+	}
+
+	public final ProgContext prog() throws RecognitionException {
+		ProgContext _localctx = new ProgContext(_ctx, getState());
+		enterRule(_localctx, 2, RULE_prog);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(37); ((ProgContext)_localctx).exp_0 = exp(0);
+			((ProgContext)_localctx)._prog =  builder.start((((ProgContext)_localctx).exp_0._exp));
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
 	public boolean sempred(RuleContext _localctx, int ruleIndex, int predIndex) {
 		switch (ruleIndex) {
-		case 1: return e_sempred((EContext)_localctx, predIndex);
+		case 0: return exp_sempred((ExpContext)_localctx, predIndex);
 		}
 		return true;
 	}
-	private boolean e_sempred(EContext _localctx, int predIndex) {
+	private boolean exp_sempred(ExpContext _localctx, int predIndex) {
 		switch (predIndex) {
 		case 0: return precpred(_ctx, 2);
 
@@ -242,17 +242,17 @@ public class DemoParser extends Parser {
 
 	public static final String _serializedATN =
 		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\n+\4\2\t\2\4\3\t"+
-		"\3\3\2\3\2\3\2\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\7\3\22\n\3\f\3\16\3\25"+
-		"\13\3\3\3\3\3\3\3\5\3\32\n\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\7"+
-		"\3&\n\3\f\3\16\3)\13\3\3\3\2\3\4\4\2\4\2\2,\2\6\3\2\2\2\4\31\3\2\2\2\6"+
-		"\7\5\4\3\2\7\b\b\2\1\2\b\3\3\2\2\2\t\n\b\3\1\2\n\13\7\t\2\2\13\32\b\3"+
-		"\1\2\f\r\7\3\2\2\r\16\7\4\2\2\16\23\5\4\3\2\17\20\7\b\2\2\20\22\5\4\3"+
-		"\2\21\17\3\2\2\2\22\25\3\2\2\2\23\21\3\2\2\2\23\24\3\2\2\2\24\26\3\2\2"+
-		"\2\25\23\3\2\2\2\26\27\7\5\2\2\27\30\b\3\1\2\30\32\3\2\2\2\31\t\3\2\2"+
-		"\2\31\f\3\2\2\2\32\'\3\2\2\2\33\34\f\4\2\2\34\35\7\6\2\2\35\36\5\4\3\5"+
-		"\36\37\b\3\1\2\37&\3\2\2\2 !\f\3\2\2!\"\7\7\2\2\"#\5\4\3\4#$\b\3\1\2$"+
-		"&\3\2\2\2%\33\3\2\2\2% \3\2\2\2&)\3\2\2\2\'%\3\2\2\2\'(\3\2\2\2(\5\3\2"+
-		"\2\2)\'\3\2\2\2\6\23\31%\'";
+		"\3\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\7\2\17\n\2\f\2\16\2\22\13\2\3\2\3\2"+
+		"\3\2\5\2\27\n\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\7\2#\n\2\f\2\16"+
+		"\2&\13\2\3\3\3\3\3\3\3\3\2\3\2\4\2\4\2\2,\2\26\3\2\2\2\4\'\3\2\2\2\6\7"+
+		"\b\2\1\2\7\b\7\n\2\2\b\27\b\2\1\2\t\n\7\3\2\2\n\13\7\4\2\2\13\20\5\2\2"+
+		"\2\f\r\7\b\2\2\r\17\5\2\2\2\16\f\3\2\2\2\17\22\3\2\2\2\20\16\3\2\2\2\20"+
+		"\21\3\2\2\2\21\23\3\2\2\2\22\20\3\2\2\2\23\24\7\5\2\2\24\25\b\2\1\2\25"+
+		"\27\3\2\2\2\26\6\3\2\2\2\26\t\3\2\2\2\27$\3\2\2\2\30\31\f\4\2\2\31\32"+
+		"\7\6\2\2\32\33\5\2\2\5\33\34\b\2\1\2\34#\3\2\2\2\35\36\f\3\2\2\36\37\7"+
+		"\7\2\2\37 \5\2\2\4 !\b\2\1\2!#\3\2\2\2\"\30\3\2\2\2\"\35\3\2\2\2#&\3\2"+
+		"\2\2$\"\3\2\2\2$%\3\2\2\2%\3\3\2\2\2&$\3\2\2\2\'(\5\2\2\2()\b\3\1\2)\5"+
+		"\3\2\2\2\6\20\26\"$";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

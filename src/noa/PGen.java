@@ -1,11 +1,8 @@
 package noa;
 
-import static noa.util.Conventions.hasPlaceholder;
-import static noa.util.Conventions.isToken;
-
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -87,8 +84,6 @@ public class PGen {
 	private void addProductions(Rules rules) {
 		Method[] ms = signature.getMethods();
 		for (Method m: ms) {
-			Type ret = m.getGenericReturnType();
-			Type[] ts = m.getGenericParameterTypes();
 			Syntax anno = m.getAnnotation(Syntax.class);
 			if (anno == null) {
 				System.err.println("Warning: method without syntax/token anno: " + m);
@@ -96,34 +91,23 @@ public class PGen {
 			}
 			String alt = anno.value();
 			String[] syms = alt.split(" ");
-			List<String> realSyms = new ArrayList<>();
-			int i = 0;
-			for (String s: syms) {
-				if (hasPlaceholder(s)) {
-					s = s.replaceFirst("_", typeToNonTerminal(ts[i]));
-					i++;
-				}
-				if (isToken(s)) {
-					i++;
-				}
-				realSyms.add(s);
-			}
+			List<String> realSyms = Arrays.asList(syms).subList(2, syms.length);
 			Level precAnno = m.getAnnotation(Level.class);
 			int prec = Conventions.MAX_PRECEDENCE;
 			if (precAnno != null) {
 				prec = precAnno.value();
 			}
-			rules.addAlt(new NormalAlt(typeToNonTerminal(ret), prec, m.getName(), realSyms));
+			rules.addAlt(new NormalAlt(syms[0], prec, m.getName(), realSyms));
 		}
 	}
 
 
-	private String typeToNonTerminal(Type t) {
-		String typeName = t.getTypeName();
-		if (typeName.matches("^java\\.util\\.List<.*>$")) {
-			typeName = typeName.substring(typeName.lastIndexOf("<") + 1, typeName.length() - 1);
-		}
-		return typeName.toLowerCase();
-	}
+//	private String typeToNonTerminal(Type t) {
+//		String typeName = t.getTypeName();
+//		if (typeName.matches("^java\\.util\\.List<.*>$")) {
+//			typeName = typeName.substring(typeName.lastIndexOf("<") + 1, typeName.length() - 1);
+//		}
+//		return typeName.toLowerCase();
+//	}
 	
 }

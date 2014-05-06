@@ -20,7 +20,7 @@ public class Demo {
 	    CommonTokenStream tokens = new CommonTokenStream(lexer);
 	    DemoParser parser = new DemoParser(tokens);
 	    parser.setBuilder(alg);
-		return (X) parser.p()._p;
+		return (X) parser.prog()._prog;
 	}
 
 	private static void testBuilder(String src) {
@@ -39,7 +39,7 @@ public class Demo {
 		System.out.println("eval " + src + " = " + eval.eval());
 		
 		IPrint print = parse(src, new Print());
-		System.out.println("print" + src + " = " + print.print());
+		System.out.println("print " + src + " = " + print.print());
 	}
 	
 	public static void main(String[] args) {
