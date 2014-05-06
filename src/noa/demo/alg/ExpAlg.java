@@ -5,21 +5,21 @@ import java.util.List;
 import noa.annos.Level;
 import noa.annos.Syntax;
 
-public interface ExpAlg<E> {
+public interface ExpAlg<O, I> {
 
 	// Support for precedence annos on infix operators.
 	@Syntax("exp = exp '*' exp") @Level(20)
-	E mul(E l, E r);
+	O mul(I l, I r);
 
 	@Syntax("exp = exp '+' exp") @Level(10)
-	E add(E l, E r);
+	O add(I l, I r);
 
 
 	// Refer to tokens (defined in Tokens.java)
 	@Syntax("exp = NUM")
-	E lit(int n);
+	O lit(int n);
 	
 	// Special notation for separated lists
 	@Syntax("exp = 'avg' '(' exp@','+ ')'")
-	E avg(List<E> es);
+	O avg(List<I> es);
 }
