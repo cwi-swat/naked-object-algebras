@@ -1,11 +1,12 @@
 package noa;
 
 import java.lang.reflect.Method;
-import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 import noa.annos.Level;
 import noa.annos.Skip;
@@ -40,14 +41,13 @@ public class PGen {
 	}
 
 	public void generate(String name, String pkg, String path, boolean log) {
-		Map<String,String> tokens = new HashMap<>();
 		Rules rules = new Rules(name, pkg, tokensClass, signature);
 		addProductions(rules);
 		
 		StringBuilder sb = new StringBuilder();
 		rules.groupByLevel();
 		rules.generate(sb);
-		generateTokens(tokens, sb);
+		generateTokens(sb);
 		
 		if (log) {
 			System.out.println(sb.toString());
@@ -62,24 +62,68 @@ public class PGen {
 		theG.fileName = path;
 		t.process(theG, true);
 	}
+	
+	static class Tk implements Comparable<Tk> {
+		private String name;
+		private boolean skip;
+		private int level;
+		private String def;
 
-	private void generateTokens(Map<String, String> tokens, StringBuilder sb) {
-		Method[] ms = tokensClass.getMethods();
+		Tk(String name, String def, boolean skip, int level) {
+			this.name = name;
+			this.def = def;
+			this.skip = skip;
+			this.level = level;
+		}
+
+		@Override
+		public int compareTo(Tk o) {
+			return new Integer(o.level).compareTo(level);
+		}
+		
+		@Override
+		public String toString() {
+			return name.toUpperCase() + ": " + def + (skip ? " -> skip" : "") + ";"; 
+		}
+	}
+
+	private void generateTokens(StringBuilder sb) {
+		Method[] ms = allMethodsOf(tokensClass);
+		List<Tk> tokens = new ArrayList<Tk>();
 		for (Method m: ms) {
 			Token tk = m.getAnnotation(Token.class);
 			if (tk == null) {
 				continue;
 			}
-
-			sb.append(m.getName().toUpperCase() + ": " + tk.value());
-			Skip sk = m.getAnnotation(Skip.class);
-			if (sk != null) {
-				sb.append(" -> skip");
-			}
-			sb.append(";\n");
+			boolean skip = m.getAnnotation(Skip.class) != null;
+			Level l = m.getAnnotation(Level.class);
+			int level = l != null ? l.value() : Conventions.MAX_PRECEDENCE;
+			tokens.add(new Tk(m.getName(), tk.value(), skip, level));
+		}
+		Collections.sort(tokens);
+		for (Tk tk: tokens) {
+			sb.append(tk.toString() + "\n");
 		}
 	}
 	
+
+	private static Method[] allMethodsOf(Class<?> cls) {
+		// Traverse explicitly because getMethods does not 
+		// return static methods in extended interfaces.
+		Set<Method> ms = new HashSet<Method>();
+		allMethods(cls, ms);
+		return ms.toArray(new Method[]{});
+	}
+
+	private static void allMethods(Class<?> cls, Set<Method> ms) {
+		for (Method m: cls.getMethods()) {
+			ms.add(m);
+		}
+		assert cls.isInterface();
+		for (Class<?> i: cls.getInterfaces()) {
+			allMethods(i, ms);
+		}
+	}
 
 	private void addProductions(Rules rules) {
 		Method[] ms = signature.getMethods();
