@@ -1,6 +1,5 @@
 package noa;
 
-import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
@@ -11,16 +10,10 @@ public class Builder {
 
 	@SuppressWarnings("unchecked")
 	public static <T> T builderBuilder(Class<T> alg) {
-		return (T) Proxy.newProxyInstance(alg.getClassLoader(),new Class[]{alg},new BuilderHandler());
+		return (T) Proxy.newProxyInstance(alg.getClassLoader(),new Class[]{alg},
+				(x, m, args) -> new Builder(m, args));
 	}
 			
-	private static class BuilderHandler implements InvocationHandler {
-		@Override
-		public Builder invoke(Object proxy, Method method, Object[] args) {
-			return new Builder(method, args);
-		} 
-	}
-
 	private Method method;
 	private Object[] args;
 
