@@ -1,9 +1,9 @@
 package noa.demo;
 
-import javafx.beans.binding.IntegerExpression;
 import noa.Builder;
 import noa.Injector;
 import noa.Pair;
+import noa.Union;
 import noa.demo.alg.EvalExp;
 import noa.demo.alg.EvalProg;
 import noa.demo.alg.ExpAlg0;
@@ -35,10 +35,10 @@ public class Demo {
 	private static void testBuilder(String src) {
 		System.out.println("## Using builder");
 		Builder builder = parse(src, Builder.builderBuilder(AllAlg.class));
-		IEval eval = builder.build(new EvalExp(), new EvalProg());
+		IEval eval = builder.build(Union.union(AllAlg.class, new EvalExp(), new EvalProg()));
 		System.out.println("eval " + src + " = " + eval.eval());
 		
-		IPrint print = builder.build(new PrintExp(), new PrintProg());
+		IPrint print = builder.build(Union.union(AllAlg.class, new PrintExp(), new PrintProg()));
 		System.out.println("print " + src + " = " + print.print());
 	}
 	
@@ -47,7 +47,7 @@ public class Demo {
 		ExpAlg0<Pair<IEval, IPrint>> expAlg = Injector.make(ExpAlg0.class, new EvalExp(), new PrintExpWithEval(), IEval.class, IPrint.class);
 		ProgAlg<IPrint, Pair<IEval, IPrint>> progAlg = new PrintProgPair();
 		Builder builder = parse(src, Builder.builderBuilder(AllAlg.class));
-		IPrint printWithEval = builder.build(expAlg, progAlg);
+		IPrint printWithEval = builder.build(Union.union(AllAlg.class, expAlg, progAlg));
 		System.out.println(printWithEval.print());
 	}
 	
@@ -55,6 +55,6 @@ public class Demo {
 		testBuilder("1 + 2 * 3 ");
 		testBuilder("avg(1,2,3)");
 		testInjector("1 + 2 * 3 ");
-		testInjector("avg(1,2,3)");
+		testInjector("avg(1 + 2, 2 * 3, 3 + 4)");
 	}
 }

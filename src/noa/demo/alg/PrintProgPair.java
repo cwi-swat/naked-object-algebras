@@ -11,7 +11,7 @@ public class PrintProgPair implements ProgAlg<IPrint, Pair<IEval, IPrint>> {
 			@Override
 			public String print() {
 				return "EVAL: " + e.x.eval() + "\n" 
-						+ "PRINT: " + e.y.print() + "\n";
+						+ "PRINT: \n" + e.y.print() + "\n";
 			}
 		};
 	}

@@ -31,33 +31,38 @@ public class Builder {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public <T> T build(Object ...algebras){
-		Object[] builtArgs = new Object[args.length];
-		for (int i = 0; i < args.length; i++) {
-			builtArgs[i] = buildArgument(args[i], algebras);
+	public <T> T build(Object algebra) {
+		try {
+			Object[] builtArgs = new Object[args.length];
+			for (int i = 0; i < args.length; i++) {
+				builtArgs[i] = buildArgument(args[i], algebra);
+			}
+			return (T)method.invoke(algebra, builtArgs);
 		}
-		return (T) invokeOnAlgebra(algebras, builtArgs);
+		catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
-	private static Object buildArgument(Object arg, Object ...algebras) {
+	private static Object buildArgument(Object arg, Object algebra) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		if (arg instanceof List<?>){
-			return buildList((List<?>) arg, algebras);
+			return buildList((List<?>) arg, algebra);
 		}
 		if (arg instanceof Builder){
-			return buildObject((Builder) arg, algebras);
+			return buildObject((Builder) arg, algebra);
 		}
 		return arg;
 	}
 
-	private static Object buildObject(Builder arg, Object[] algebras) {
-		return arg.build(algebras);
+	private static Object buildObject(Builder arg, Object algebra) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		return arg.build(algebra);
 	}
 
-	private static List<Object> buildList(List<?> argList, Object[] algebras) {
+	private static List<Object> buildList(List<?> argList, Object algebra) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		List<Object> args = new ArrayList<Object>();
 		for (Object arg : argList){
 			if (arg instanceof Builder){
-				args.add(buildObject((Builder)arg, algebras));
+				args.add(buildObject((Builder)arg, algebra));
 			}
 			else {
 				args.add(arg);
@@ -66,28 +71,5 @@ public class Builder {
 		return args;
 	}
 
-	private Object invokeOnAlgebra(Object[] algebras, Object[] args) {
-		for (Object factory : algebras){
-			if (hasMethod(factory)) {
-				try {
-					return method.invoke(factory, args);
-				} 
-				catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-					throw new RuntimeException(e);
-				}
-			}
-		}
-		throw new UnsupportedOperationException("method was not found in algebras: " + method.getName() + "/" + method.getParameterCount());
-	}
 
-	private boolean hasMethod(Object factory) {
-		Method[] methods = factory.getClass().getMethods();
-		for (Method m : methods)  {
-			// TODO: check argument types too?
-			if (m.getName().equals(method.getName()) && m.getParameterCount() == method.getParameterCount()) {
-				return true;
-			}
-		}
-		return false;
-	}
 }

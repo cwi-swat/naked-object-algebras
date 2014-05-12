@@ -11,7 +11,7 @@ public class PrintExpWithEval implements ExpAlg<Function<IEval, IPrint>, IPrint>
 			return new IPrint() {
 				@Override
 				public String print() {
-					return "Eval: mul " + eval.eval() + "\n";
+					return "Eval: mul " + eval.eval() + "\n" + l.print() + r.print();
 				}
 			};
 		};
@@ -23,7 +23,7 @@ public class PrintExpWithEval implements ExpAlg<Function<IEval, IPrint>, IPrint>
 			return new IPrint() {
 				@Override
 				public String print() {
-					return "Eval: add" + eval.eval() + "\n";
+					return "Eval: add " + eval.eval() + "\n" + l.print() + r.print();
 				}
 			};
 		};
@@ -47,7 +47,11 @@ public class PrintExpWithEval implements ExpAlg<Function<IEval, IPrint>, IPrint>
 			return new IPrint() {
 				@Override
 				public String print() {
-					return "Eval: avg " + eval.eval() + "\n";
+					String s = "Eval: avg " + eval.eval() + "\n";
+					for (IPrint p: es) {
+						s += p.print();
+					}
+					return s;
 				}
 			};
 		};
