@@ -28,6 +28,10 @@ public interface Conventions {
 		return s.substring(0, s.length() - 1);
 	}
 	
+	static String getRegularOperator(String s) {
+		return s.substring(s.length() - 1);
+	}
+	
 	static boolean isSepList(String s) {
 		return s.matches("^[a-z][a-zA-Z]*@'.+'*[*+]$");
 	}

@@ -45,6 +45,27 @@ public class PrintExp implements ExpAlg0<IPrint> {
 			}
 		};
 	}
+	
+	@Override
+	public IPrint avg2(List<IPrint> es) {
+		return new IPrint() {
+
+			@Override
+			public String print() {
+				String s = "avg2(";
+				for (IPrint e : es) {
+					s += e.print();
+					s += " ";
+				}
+				if (!s.equals("avg2(")) {
+					s = s.substring(0, s.length() - 1);
+				}
+				s += ")";
+				return s;
+			}
+		};
+	}
+
 
 	@Override
 	public IPrint mul(IPrint l, IPrint r) {

@@ -22,4 +22,9 @@ public interface ExpAlg<O, I> {
 	// Special notation for separated lists
 	@Syntax("exp = 'avg' '(' exp@','+ ')'")
 	O avg(List<I> es);
+
+	// Non separated lists
+	@Syntax("exp = 'avg2' '(' exp+ ')'")
+	O avg2(List<I> es);
+
 }

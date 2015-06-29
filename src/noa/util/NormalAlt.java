@@ -48,8 +48,10 @@ public class NormalAlt extends Alt implements Conventions {
 			}
 			else if (isRegular(s)) {
 				String n = getRegularSymbol(s);
-				prod += labelFor(labelCounter, n) + "+=" + s + " ";
-				args += "lift(\"" + returnVariable(n) + "\", $" + labelFor(labelCounter, n)  + "),";
+				String x = labelFor(labelCounter, n) + "_list";
+				prod += "(" + x + "+=" + n + ")" + getRegularOperator(s) + " ";
+				System.err.println("PROD = " + prod);
+				args += "lift(\"" + returnVariable(n) + "\", $" + x  + "),";
 				labelCounter += 1;
 			}
 			else if (isToken(s)) {

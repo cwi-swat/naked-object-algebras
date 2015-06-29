@@ -44,6 +44,24 @@ public class EvalExp implements ExpAlg0<IEval> {
 	}
 
 	@Override
+	public IEval avg2(List<IEval> es) {
+		return new IEval() {
+
+			@Override
+			public int eval() {
+				int n = 0;
+				int i = 0;
+				for (IEval e : es) {
+					n += e.eval();
+					i++;
+				}
+				return n / i;
+			}
+		};
+	}
+
+	
+	@Override
 	public IEval mul(IEval l, IEval r) {
 		return new IEval() {
 
