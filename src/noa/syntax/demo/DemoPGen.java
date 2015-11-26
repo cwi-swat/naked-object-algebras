@@ -1,7 +1,5 @@
 package noa.syntax.demo;
 
-import noa.demo.syn.AllAlg;
-import noa.demo.syn.Tokens;
 import noa.syntax.PGen;
 
 public class DemoPGen {

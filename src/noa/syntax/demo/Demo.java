@@ -5,19 +5,6 @@ import org.antlr.v4.runtime.CommonTokenStream;
 
 import noa.Injector;
 import noa.Pair;
-import noa.demo.alg.EvalExp;
-import noa.demo.alg.EvalProg;
-import noa.demo.alg.ExpAlg0;
-import noa.demo.alg.IEval;
-import noa.demo.alg.IPrint;
-import noa.demo.alg.PrintExp;
-import noa.demo.alg.PrintExpWithEval;
-import noa.demo.alg.PrintProg;
-import noa.demo.alg.PrintProgPair;
-import noa.demo.alg.ProgAlg;
-import noa.demo.syn.AllAlg;
-import noa.demo.syn.DemoLexer;
-import noa.demo.syn.DemoParser;
 import noa.proxy.Recorder;
 import noa.proxy.Union;
 

@@ -1,7 +1,7 @@
 // Generated from src/noa/syntax/demo/ by ANTLR 4.2.2
 
 package noa.syntax.demo;
-import static noa.demo.syn.Tokens.*;
+import static noa.syntax.demo.Tokens.*;
 
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
@@ -18,10 +18,10 @@ public class DemoParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		T__6=1, T__5=2, T__4=3, T__3=4, T__2=5, T__1=6, T__0=7, WS=8, NUM=9;
+		T__6=1, T__5=2, T__4=3, T__3=4, T__2=5, T__1=6, T__0=7, NUM=8, WS=9;
 	public static final String[] tokenNames = {
-		"<INVALID>", "'avg'", "'avg2'", "'('", "')'", "'*'", "'+'", "','", "WS", 
-		"NUM"
+		"<INVALID>", "'avg'", "'avg2'", "'('", "')'", "'*'", "'+'", "','", "NUM", 
+		"WS"
 	};
 	public static final int
 		RULE_exp = 0, RULE_prog = 1;
@@ -45,8 +45,8 @@ public class DemoParser extends Parser {
 	public ATN getATN() { return _ATN; }
 
 
-	private noa.demo.syn.AllAlg builder;
-	public void setBuilder(noa.demo.syn.AllAlg builder) { this.builder = builder; }
+	private noa.syntax.demo.AllAlg builder;
+	public void setBuilder(noa.syntax.demo.AllAlg builder) { this.builder = builder; }
 	private static <X> java.util.List<X> lift(String name, java.util.List<?> ctxs, X ...heads) {
 	  java.util.List<X> l = new java.util.ArrayList<X>();
 	  for (X h: heads) { l.add(h); }
@@ -269,7 +269,7 @@ public class DemoParser extends Parser {
 		"\t\3\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\7\2\17\n\2\f\2\16\2\22\13\2\3\2\3"+
 		"\2\3\2\3\2\3\2\3\2\6\2\32\n\2\r\2\16\2\33\3\2\3\2\3\2\5\2!\n\2\3\2\3\2"+
 		"\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\7\2-\n\2\f\2\16\2\60\13\2\3\3\3\3\3\3"+
-		"\3\3\2\3\2\4\2\4\2\28\2 \3\2\2\2\4\61\3\2\2\2\6\7\b\2\1\2\7\b\7\13\2\2"+
+		"\3\3\2\3\2\4\2\4\2\28\2 \3\2\2\2\4\61\3\2\2\2\6\7\b\2\1\2\7\b\7\n\2\2"+
 		"\b!\b\2\1\2\t\n\7\3\2\2\n\13\7\5\2\2\13\20\5\2\2\2\f\r\7\t\2\2\r\17\5"+
 		"\2\2\2\16\f\3\2\2\2\17\22\3\2\2\2\20\16\3\2\2\2\20\21\3\2\2\2\21\23\3"+
 		"\2\2\2\22\20\3\2\2\2\23\24\7\6\2\2\24\25\b\2\1\2\25!\3\2\2\2\26\27\7\4"+
