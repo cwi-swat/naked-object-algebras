@@ -3,8 +3,8 @@ package noa.syntax.demo;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 
-import noa.Injector;
-import noa.Pair;
+import noa.proxy.Injector;
+import noa.proxy.Pair;
 import noa.proxy.Recorder;
 import noa.proxy.Union;
 
