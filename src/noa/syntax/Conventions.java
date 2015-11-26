@@ -1,8 +1,10 @@
-package noa.util;
+package noa.syntax;
 
-public interface Conventions {
+final class Conventions {
 	static final String BUILDER_FIELD = "builder";
 	static final int MAX_PRECEDENCE = Integer.MAX_VALUE;
+	
+	private Conventions() {}
 	
 	static boolean hasPlaceholder(String s) {
 		return s.startsWith("_");

@@ -1,4 +1,4 @@
-package noa.util;
+package noa.syntax;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -6,9 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static noa.util.Conventions.*;
+import static noa.syntax.Conventions.*;
 
-public class Rules implements Conventions {
+public class Rules {
 	private Map<String, List<Alt>> rules;
 	private String name;
 	private String pkg;
@@ -100,7 +100,7 @@ public class Rules implements Conventions {
 		addParserMembers(sb);
 
 		for (String nt : rules.keySet()) {
-			sb.append(nt + " returns [Object " + returnVariable(nt) + "]:\n");
+			sb.append(nt + " returns [Object " + Conventions.returnVariable(nt) + "]:\n");
 			List<Alt> ntAlts = rules.get(nt);
 			int numOfAlts = ntAlts.size();
 			for (int i = 0; i < numOfAlts; i++) {

@@ -1,4 +1,4 @@
-package noa;
+package noa.syntax;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -8,17 +8,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.antlr.v4.Tool;
+import org.antlr.v4.tool.Grammar;
+import org.antlr.v4.tool.ast.GrammarRootAST;
+
 import noa.annos.Level;
 import noa.annos.Skip;
 import noa.annos.Syntax;
 import noa.annos.Token;
-import noa.util.Conventions;
-import noa.util.NormalAlt;
-import noa.util.Rules;
-
-import org.antlr.v4.Tool;
-import org.antlr.v4.tool.Grammar;
-import org.antlr.v4.tool.ast.GrammarRootAST;
 
 
 /*

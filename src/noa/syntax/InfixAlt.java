@@ -1,8 +1,8 @@
-package noa.util;
+package noa.syntax;
 
 import java.util.Map;
 
-import static noa.util.Conventions.*;
+import static noa.syntax.Conventions.*;
 
 public class InfixAlt extends Alt {
 	private Map<String, String> tokenConsMap;

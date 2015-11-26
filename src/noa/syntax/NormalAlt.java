@@ -1,10 +1,10 @@
-package noa.util;
+package noa.syntax;
 
 import java.util.List;
 
-import static noa.util.Conventions.*;
+import static noa.syntax.Conventions.*;
 
-public class NormalAlt extends Alt implements Conventions {
+public class NormalAlt extends Alt {
 
 	private List<String> syms;
 	private String cons;

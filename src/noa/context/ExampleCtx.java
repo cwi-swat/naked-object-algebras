@@ -7,14 +7,12 @@ import java.util.Map.Entry;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import noa.ctx.env.ArrayDequeReader;
-import noa.ctx.env.Env;
-import noa.ctx.env.Reader;
-import noa.ctx.env.WithEnv;
-import noa.ctx.state.Cell;
-import noa.ctx.state.WithStore;
-
-
+import noa.context.env.ArrayDequeReader;
+import noa.context.env.Env;
+import noa.context.env.Reader;
+import noa.context.env.WithEnv;
+import noa.context.state.Cell;
+import noa.context.state.WithStore;
 
 interface ArithAlg<E> {
 	E add(E l, E r);
