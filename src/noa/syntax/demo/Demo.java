@@ -3,8 +3,6 @@ package noa.syntax.demo;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 
-import noa.proxy.Injector;
-import noa.proxy.Pair;
 import noa.proxy.Recorder;
 import noa.proxy.Union;
 
@@ -29,21 +27,9 @@ public class Demo {
 		System.out.println("print " + src + " = " + print.print());
 	}
 	
-	@SuppressWarnings("unchecked")
-	private static void testInjector(String src) {
-		ExpAlg0<Pair<IEval, IPrint>> expAlg = Injector.make(ExpAlg0.class, new EvalExp(), new PrintExpWithEval(), IEval.class, IPrint.class);
-		ProgAlg<IPrint, Pair<IEval, IPrint>> progAlg = new PrintProgPair();
-		Recorder builder = parse(src, Recorder.create(AllAlg.class));
-		IPrint printWithEval = builder.build(Union.union(AllAlg.class, expAlg, progAlg));
-		System.out.println(printWithEval.print());
-	}
-	
 	public static void main(String[] args) {
 		testBuilder("1 + 2 * 3 ");
 		testBuilder("avg(1,2,3)");
 		testBuilder("avg2(1 2 3)");
-		testInjector("1 + 2 * 3 ");
-		testInjector("avg(1 + 2, 2 * 3, 3 + 4)");
-		testInjector("avg2(1 2 3)");
-}
+	}
 }

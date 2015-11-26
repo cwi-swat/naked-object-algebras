@@ -2,7 +2,7 @@ package noa.syntax.demo;
 
 import java.util.List;
 
-public class PrintExp implements ExpAlg0<IPrint> {
+public class PrintExp implements ExpAlg<IPrint> {
 
 	@Override
 	public IPrint add(IPrint l, IPrint r) {

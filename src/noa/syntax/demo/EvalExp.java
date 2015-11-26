@@ -2,7 +2,7 @@ package noa.syntax.demo;
 
 import java.util.List;
 
-public class EvalExp implements ExpAlg0<IEval> {
+public class EvalExp implements ExpAlg<IEval> {
 
 	@Override
 	public IEval add(IEval l, IEval r) {
