@@ -1,4 +1,4 @@
-package noa;
+package noa.proxy;
 
 public class Pair<X, Y> {
 	public final X x;

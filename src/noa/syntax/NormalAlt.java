@@ -4,7 +4,7 @@ import java.util.List;
 
 import static noa.syntax.Conventions.*;
 
-public class NormalAlt extends Alt {
+class NormalAlt extends Alt {
 
 	private List<String> syms;
 	private String cons;

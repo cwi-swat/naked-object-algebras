@@ -1,6 +1,6 @@
 package noa.syntax;
 
-public abstract class Alt implements Comparable<Alt> {
+abstract class Alt implements Comparable<Alt> {
 	private String nt;
 	private int prec;
 	

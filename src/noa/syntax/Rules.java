@@ -8,7 +8,7 @@ import java.util.Map;
 
 import static noa.syntax.Conventions.*;
 
-public class Rules {
+class Rules {
 	private Map<String, List<Alt>> rules;
 	private String name;
 	private String pkg;
