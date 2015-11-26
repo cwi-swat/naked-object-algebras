@@ -1,4 +1,4 @@
-package noa.demo;
+package noa.syntax.demo;
 
 import noa.demo.syn.AllAlg;
 import noa.demo.syn.Tokens;
@@ -8,7 +8,7 @@ public class DemoPGen {
 	
 	public static void main(String[] args) {
 		PGen pgen = new PGen(Tokens.class, AllAlg.class);
-		pgen.generate("Demo", "noa.demo.syn", "src/noa/demo/syn/", true);
+		pgen.generate("Demo", "noa.syntax.demo", "src/noa/syntax/demo/", true);
 	}
 	
 }

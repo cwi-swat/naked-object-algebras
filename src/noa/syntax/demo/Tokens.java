@@ -1,4 +1,4 @@
-package noa.demo.syn;
+package noa.syntax.demo;
 
 import noa.syntax.Skip;
 import noa.syntax.Token;

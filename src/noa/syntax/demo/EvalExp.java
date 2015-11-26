@@ -1,4 +1,4 @@
-package noa.demo.alg;
+package noa.syntax.demo;
 
 import java.util.List;
 

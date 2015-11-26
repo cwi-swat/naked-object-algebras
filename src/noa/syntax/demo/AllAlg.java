@@ -1,4 +1,4 @@
-package noa.demo.syn;
+package noa.syntax.demo;
 
 import noa.demo.alg.ExpAlg0;
 import noa.demo.alg.ProgAlg;

@@ -1,6 +1,6 @@
-// Generated from src/noa/demo/syn/ by ANTLR 4.2.2
+// Generated from src/noa/syntax/demo/ by ANTLR 4.2.2
 
-package noa.demo.syn;
+package noa.syntax.demo;
 import static noa.demo.syn.Tokens.*;
 
 import org.antlr.v4.runtime.Lexer;
@@ -38,7 +38,7 @@ public class DemoLexer extends Lexer {
 	}
 
 	@Override
-	public String getGrammarFileName() { return "syn"; }
+	public String getGrammarFileName() { return "demo"; }
 
 	@Override
 	public String[] getTokenNames() { return tokenNames; }

@@ -1,6 +1,6 @@
-// Generated from src/noa/demo/syn/ by ANTLR 4.2.2
+// Generated from src/noa/syntax/demo/ by ANTLR 4.2.2
 
-package noa.demo.syn;
+package noa.syntax.demo;
 import static noa.demo.syn.Tokens.*;
 
 import org.antlr.v4.runtime.atn.*;
@@ -30,7 +30,7 @@ public class DemoParser extends Parser {
 	};
 
 	@Override
-	public String getGrammarFileName() { return "syn"; }
+	public String getGrammarFileName() { return "demo"; }
 
 	@Override
 	public String[] getTokenNames() { return tokenNames; }
@@ -67,10 +67,10 @@ public class DemoParser extends Parser {
 	public static class ExpContext extends ParserRuleContext {
 		public Object _exp;
 		public ExpContext exp_0;
-		public ExpContext exp;
-		public List<ExpContext> exp_0_list = new ArrayList<ExpContext>();
 		public Token NUM_0;
+		public ExpContext exp;
 		public List<ExpContext> exp_0tail = new ArrayList<ExpContext>();
+		public List<ExpContext> exp_0_list = new ArrayList<ExpContext>();
 		public ExpContext exp_1;
 		public List<ExpContext> exp() {
 			return getRuleContexts(ExpContext.class);
@@ -103,58 +103,58 @@ public class DemoParser extends Parser {
 			{
 			setState(30);
 			switch (_input.LA(1)) {
-			case 2:
-				{
-				setState(5); match(2);
-				setState(6); match(3);
-				setState(8); 
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-				do {
-					{
-					{
-					setState(7); ((ExpContext)_localctx).exp = exp(0);
-					((ExpContext)_localctx).exp_0_list.add(((ExpContext)_localctx).exp);
-					}
-					}
-					setState(10); 
-					_errHandler.sync(this);
-					_la = _input.LA(1);
-				} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << 1) | (1L << 2) | (1L << NUM))) != 0) );
-				setState(12); match(4);
-				((ExpContext)_localctx)._exp =  builder.avg2(lift("_exp", ((ExpContext)_localctx).exp_0_list));
-				}
-				break;
 			case NUM:
 				{
-				setState(15); ((ExpContext)_localctx).NUM_0 = match(NUM);
+				setState(5); ((ExpContext)_localctx).NUM_0 = match(NUM);
 				((ExpContext)_localctx)._exp =  builder.lit(num((((ExpContext)_localctx).NUM_0!=null?((ExpContext)_localctx).NUM_0.getText():null)));
 				}
 				break;
 			case 1:
 				{
-				setState(17); match(1);
-				setState(18); match(3);
+				setState(7); match(1);
+				setState(8); match(3);
 				{
-				setState(19); ((ExpContext)_localctx).exp_0 = exp(0);
-				setState(24);
+				setState(9); ((ExpContext)_localctx).exp_0 = exp(0);
+				setState(14);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==7) {
 					{
 					{
-					setState(20); match(7);
-					setState(21); ((ExpContext)_localctx).exp = exp(0);
+					setState(10); match(7);
+					setState(11); ((ExpContext)_localctx).exp = exp(0);
 					((ExpContext)_localctx).exp_0tail.add(((ExpContext)_localctx).exp);
 					}
 					}
-					setState(26);
+					setState(16);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
 				}
-				setState(27); match(4);
+				setState(17); match(4);
 				((ExpContext)_localctx)._exp =  builder.avg(lift("_exp", ((ExpContext)_localctx).exp_0tail, ((ExpContext)_localctx).exp_0._exp));
+				}
+				break;
+			case 2:
+				{
+				setState(20); match(2);
+				setState(21); match(3);
+				setState(23); 
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+				do {
+					{
+					{
+					setState(22); ((ExpContext)_localctx).exp = exp(0);
+					((ExpContext)_localctx).exp_0_list.add(((ExpContext)_localctx).exp);
+					}
+					}
+					setState(25); 
+					_errHandler.sync(this);
+					_la = _input.LA(1);
+				} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << 1) | (1L << 2) | (1L << NUM))) != 0) );
+				setState(27); match(4);
+				((ExpContext)_localctx)._exp =  builder.avg2(lift("_exp", ((ExpContext)_localctx).exp_0_list));
 				}
 				break;
 			default:
@@ -266,19 +266,20 @@ public class DemoParser extends Parser {
 
 	public static final String _serializedATN =
 		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\13\65\4\2\t\2\4\3"+
-		"\t\3\3\2\3\2\3\2\3\2\6\2\13\n\2\r\2\16\2\f\3\2\3\2\3\2\3\2\3\2\3\2\3\2"+
-		"\3\2\3\2\3\2\7\2\31\n\2\f\2\16\2\34\13\2\3\2\3\2\3\2\5\2!\n\2\3\2\3\2"+
+		"\t\3\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\7\2\17\n\2\f\2\16\2\22\13\2\3\2\3"+
+		"\2\3\2\3\2\3\2\3\2\6\2\32\n\2\r\2\16\2\33\3\2\3\2\3\2\5\2!\n\2\3\2\3\2"+
 		"\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\7\2-\n\2\f\2\16\2\60\13\2\3\3\3\3\3\3"+
-		"\3\3\2\3\2\4\2\4\2\28\2 \3\2\2\2\4\61\3\2\2\2\6\7\b\2\1\2\7\b\7\4\2\2"+
-		"\b\n\7\5\2\2\t\13\5\2\2\2\n\t\3\2\2\2\13\f\3\2\2\2\f\n\3\2\2\2\f\r\3\2"+
-		"\2\2\r\16\3\2\2\2\16\17\7\6\2\2\17\20\b\2\1\2\20!\3\2\2\2\21\22\7\13\2"+
-		"\2\22!\b\2\1\2\23\24\7\3\2\2\24\25\7\5\2\2\25\32\5\2\2\2\26\27\7\t\2\2"+
-		"\27\31\5\2\2\2\30\26\3\2\2\2\31\34\3\2\2\2\32\30\3\2\2\2\32\33\3\2\2\2"+
-		"\33\35\3\2\2\2\34\32\3\2\2\2\35\36\7\6\2\2\36\37\b\2\1\2\37!\3\2\2\2 "+
-		"\6\3\2\2\2 \21\3\2\2\2 \23\3\2\2\2!.\3\2\2\2\"#\f\4\2\2#$\7\7\2\2$%\5"+
-		"\2\2\5%&\b\2\1\2&-\3\2\2\2\'(\f\3\2\2()\7\b\2\2)*\5\2\2\4*+\b\2\1\2+-"+
-		"\3\2\2\2,\"\3\2\2\2,\'\3\2\2\2-\60\3\2\2\2.,\3\2\2\2./\3\2\2\2/\3\3\2"+
-		"\2\2\60.\3\2\2\2\61\62\5\2\2\2\62\63\b\3\1\2\63\5\3\2\2\2\7\f\32 ,.";
+		"\3\3\2\3\2\4\2\4\2\28\2 \3\2\2\2\4\61\3\2\2\2\6\7\b\2\1\2\7\b\7\13\2\2"+
+		"\b!\b\2\1\2\t\n\7\3\2\2\n\13\7\5\2\2\13\20\5\2\2\2\f\r\7\t\2\2\r\17\5"+
+		"\2\2\2\16\f\3\2\2\2\17\22\3\2\2\2\20\16\3\2\2\2\20\21\3\2\2\2\21\23\3"+
+		"\2\2\2\22\20\3\2\2\2\23\24\7\6\2\2\24\25\b\2\1\2\25!\3\2\2\2\26\27\7\4"+
+		"\2\2\27\31\7\5\2\2\30\32\5\2\2\2\31\30\3\2\2\2\32\33\3\2\2\2\33\31\3\2"+
+		"\2\2\33\34\3\2\2\2\34\35\3\2\2\2\35\36\7\6\2\2\36\37\b\2\1\2\37!\3\2\2"+
+		"\2 \6\3\2\2\2 \t\3\2\2\2 \26\3\2\2\2!.\3\2\2\2\"#\f\4\2\2#$\7\7\2\2$%"+
+		"\5\2\2\5%&\b\2\1\2&-\3\2\2\2\'(\f\3\2\2()\7\b\2\2)*\5\2\2\4*+\b\2\1\2"+
+		"+-\3\2\2\2,\"\3\2\2\2,\'\3\2\2\2-\60\3\2\2\2.,\3\2\2\2./\3\2\2\2/\3\3"+
+		"\2\2\2\60.\3\2\2\2\61\62\5\2\2\2\62\63\b\3\1\2\63\5\3\2\2\2\7\20\33 ,"+
+		".";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
