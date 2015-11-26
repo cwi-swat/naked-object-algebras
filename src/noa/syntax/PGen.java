@@ -12,11 +12,6 @@ import org.antlr.v4.Tool;
 import org.antlr.v4.tool.Grammar;
 import org.antlr.v4.tool.ast.GrammarRootAST;
 
-import noa.annos.Level;
-import noa.annos.Skip;
-import noa.annos.Syntax;
-import noa.annos.Token;
-
 
 /*
  * TODO: <assoc=left> and <assoc=right> (non-assoc is not supported by antlr4)

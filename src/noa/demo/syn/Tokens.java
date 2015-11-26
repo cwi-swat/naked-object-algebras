@@ -1,7 +1,7 @@
 package noa.demo.syn;
 
-import noa.annos.Skip;
-import noa.annos.Token;
+import noa.syntax.Skip;
+import noa.syntax.Token;
 
 public interface Tokens {
 	@Token("[0-9]+")

@@ -1,6 +1,6 @@
 package noa.demo.alg;
 
-import noa.annos.Syntax;
+import noa.syntax.Syntax;
 
 public interface ProgAlg<P, E> {
 	@Syntax("prog = exp")

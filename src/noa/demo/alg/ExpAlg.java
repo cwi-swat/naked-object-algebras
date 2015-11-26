@@ -2,8 +2,8 @@ package noa.demo.alg;
 
 import java.util.List;
 
-import noa.annos.Level;
-import noa.annos.Syntax;
+import noa.syntax.Level;
+import noa.syntax.Syntax;
 
 public interface ExpAlg<O, I> {
 
