@@ -1,6 +1,5 @@
 package noa.ctx;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -8,8 +7,9 @@ import java.util.Map.Entry;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import io.usethesource.capsule.DefaultTrieMap;
-import io.usethesource.capsule.ImmutableMap;
+import noa.ctx.env.ArrayDequeReader;
+import noa.ctx.env.Env;
+import noa.ctx.env.Reader;
 import noa.ctx.env.WithEnv;
 import noa.ctx.state.Cell;
 import noa.ctx.state.WithStore;
@@ -52,12 +52,12 @@ interface EvalArith extends ArithAlg<Supplier<Object>> {
 }
 
 
-interface EvalLet extends LetAlg<Supplier<Object>>, WithEnv {
+interface EvalLet extends LetAlg<Supplier<Object>>, WithEnv<String, Object> {
 	
 	
 	@Override
 	default Supplier<Object> let(String x, Supplier<Object> e, Supplier<Object> b) {
-		return () -> local(askEnv().__putAll(DefaultTrieMap.of(x, e.get())), b); 
+		return () -> local(askEnv().bind(x, e.get()), b); 
 	}
 
 	@Override
@@ -66,13 +66,13 @@ interface EvalLet extends LetAlg<Supplier<Object>>, WithEnv {
 	}
 }
 
-interface EvalLetStore extends LetAlg<Supplier<Object>>, WithEnv, WithStore {
+interface EvalLetStore extends LetAlg<Supplier<Object>>, WithEnv<String, Object>, WithStore {
 	
 	@Override
 	default Supplier<Object> let(String x, Supplier<Object> e, Supplier<Object> b) {
 		return () -> {
 			Cell c = new Cell();
-			return local(askEnv().__put(x, c), 
+			return local(askEnv().bind(x, c), 
 					() -> modify(askStore().__put(c, e.get()), b)); 
 		};
 	}
@@ -83,12 +83,12 @@ interface EvalLetStore extends LetAlg<Supplier<Object>>, WithEnv, WithStore {
 	}
 }
 
-interface EvalLam extends LamAlg<Supplier<Object>>, WithEnv {
+interface EvalLam extends LamAlg<Supplier<Object>>, WithEnv<String, Object> {
 	@Override
 	default Supplier<Object> lam(String x, Supplier<Object> e) {
 		return () -> {
-			ImmutableMap<String, Object> lex = askEnv();
-			Function<Object, Object> f = (Object a) -> local(lex.__put(x, a), e);
+			Env<String,Object> lex = askEnv();
+			Function<Object, Object> f = (Object a) -> local(lex.bind(x, a), e);
 			return f;
 		};
 	}
@@ -125,6 +125,44 @@ interface EvalSeq extends SeqAlg<Supplier<Object>>, WithStore {
 }
 
 
+class MyEnv<K, V> implements Env<K, V> {
+
+	public static final <K, V> MyEnv<K,V> empty() {
+		return new MyEnv<>();
+	}
+	
+	private final MyEnv<K, V> parent;
+	private final K k;
+	private final V v;
+
+	private MyEnv() {
+		this(null, null, null);
+	}
+	
+	MyEnv(MyEnv<K, V> parent, K k, V v) {
+		this.parent = parent;
+		this.k = k;
+		this.v = v;
+	}
+	
+	@Override
+	public V get(K k) {
+		if (k.equals(this.k)) {
+			return this.v;
+		}
+		if (parent != null) {
+			return parent.get(k);
+		}
+		return null;
+	}
+
+	@Override
+	public Env<K, V> bind(K k, V v) {
+		return new MyEnv<>(this, k, v);
+	}
+	
+}
+
 
 public class ExampleCtx implements EvalArith, EvalLet, EvalLam, EvalSeq {
 	public static void main(String[] args) {
@@ -145,6 +183,18 @@ public class ExampleCtx implements EvalArith, EvalLet, EvalLam, EvalSeq {
 		}
 		
 	}
+
+	private ArrayDequeReader<Env<String,Object>> envReader;
+
+	public ExampleCtx() {
+		this.envReader = new ArrayDequeReader<Env<String, Object>>(MyEnv.empty());
+	}
 	
+	@Override
+	public Reader<Env<String, Object>> envReader() {
+		return envReader;
+	}
+
+
 }
 

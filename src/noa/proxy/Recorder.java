@@ -1,4 +1,4 @@
-package noa;
+package noa.proxy;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -6,19 +6,19 @@ import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Builder {
+public final class Recorder {
 
 	@SuppressWarnings("unchecked")
-	public static <T> T builderBuilder(Class<T> alg) {
+	public static <T> T create(Class<T> alg) {
 		return (T) Proxy.newProxyInstance(alg.getClassLoader(),new Class[]{alg},
-				(x, m, args) -> new Builder(m, args));
+				(x, m, args) -> new Recorder(m, args));
 	}
 			
 	private Method method;
 	private Object[] args;
 
 	
-	private Builder(Method method, Object[] args){
+	private Recorder(Method method, Object[] args){
 		this.method = method;
 		this.args = args;		
 	}
@@ -41,21 +41,21 @@ public class Builder {
 		if (arg instanceof List<?>){
 			return buildList((List<?>) arg, algebra);
 		}
-		if (arg instanceof Builder){
-			return buildObject((Builder) arg, algebra);
+		if (arg instanceof Recorder){
+			return buildObject((Recorder) arg, algebra);
 		}
 		return arg;
 	}
 
-	private static Object buildObject(Builder arg, Object algebra) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	private static Object buildObject(Recorder arg, Object algebra) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		return arg.build(algebra);
 	}
 
 	private static List<Object> buildList(List<?> argList, Object algebra) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		List<Object> args = new ArrayList<Object>();
 		for (Object arg : argList){
-			if (arg instanceof Builder){
-				args.add(buildObject((Builder)arg, algebra));
+			if (arg instanceof Recorder){
+				args.add(buildObject((Recorder)arg, algebra));
 			}
 			else {
 				args.add(arg);

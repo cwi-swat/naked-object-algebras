@@ -2,22 +2,22 @@ package noa.ctx.env;
 
 import java.util.function.Supplier;
 
-import io.usethesource.capsule.DefaultTrieMap;
-import io.usethesource.capsule.ImmutableMap;
-
-public interface WithEnv {
-	static Reader<ImmutableMap<String, Object>> reader = new Reader<>(DefaultTrieMap.of());
+public interface WithEnv<K, V> {
+	// note: this can not be an abstract method, because than all readers will be the same thing
+	// IOW the reader should "interface local"
+	//static final LinkedStackReader<ImmutableMap<String, Object>> reader = new LinkedStackReader<>(DefaultTrieMap.of());
 	
-	default <T> Supplier<T>cc(Supplier<T> k) {
-		return reader.cc(k);
+	// the name of this thing should be unique across all With... things
+	// (so: it's actually not *safe*)
+	// how to brand it?
+	Reader<Env<K, V>> envReader();
+	
+	default Env<K, V> askEnv() {
+		return envReader().ask();
 	}
 	
-	default ImmutableMap<String, Object> askEnv() {
-		return reader.ask();
-	}
-	
-	default <T> T local(ImmutableMap<String, Object> env, Supplier<T> f) {
-		return reader.local(env, f);
+	default <T> T local(Env<K, V> env, Supplier<T> f) {
+		return envReader().local(env, f);
 	}
 	
 }

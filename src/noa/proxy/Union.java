@@ -1,10 +1,9 @@
-package noa;
+package noa.proxy;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Proxy;
 
-public class Union {
-
+public final class Union {
 
 	@SuppressWarnings("unchecked")
 	public static <T> T union(Class<T> algInterface, Object ...algs) {

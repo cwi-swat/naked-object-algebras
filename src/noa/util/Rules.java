@@ -100,8 +100,7 @@ public class Rules implements Conventions {
 		addParserMembers(sb);
 
 		for (String nt : rules.keySet()) {
-			sb.append(nt + " returns [Object "
-					+ returnVariable(nt) + "]:\n");
+			sb.append(nt + " returns [Object " + returnVariable(nt) + "]:\n");
 			List<Alt> ntAlts = rules.get(nt);
 			int numOfAlts = ntAlts.size();
 			for (int i = 0; i < numOfAlts; i++) {
