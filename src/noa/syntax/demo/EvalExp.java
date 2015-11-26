@@ -6,70 +6,28 @@ public class EvalExp implements ExpAlg<IEval> {
 
 	@Override
 	public IEval add(IEval l, IEval r) {
-		return new IEval() {
-
-			@Override
-			public int eval() {
-				return l.eval() + r.eval();
-			}
-		};
+		return () -> l.eval() + r.eval();
 	}
 
 	@Override
 	public IEval lit(int n) {
-		return new IEval() {
-
-			@Override
-			public int eval() {
-				return n;
-			}
-		};
+		return () -> n;
 	}
 
 	@Override
 	public IEval avg(List<IEval> es) {
-		return new IEval() {
-
-			@Override
-			public int eval() {
-				int n = 0;
-				int i = 0;
-				for (IEval e : es) {
-					n += e.eval();
-					i++;
-				}
-				return n / i;
-			}
-		};
+		return () -> es.stream().mapToInt(IEval::eval).sum() / es.size();  
 	}
 
 	@Override
 	public IEval avg2(List<IEval> es) {
-		return new IEval() {
-
-			@Override
-			public int eval() {
-				int n = 0;
-				int i = 0;
-				for (IEval e : es) {
-					n += e.eval();
-					i++;
-				}
-				return n / i;
-			}
-		};
+		return () -> es.stream().mapToInt(IEval::eval).sum() / es.size();
 	}
 
 	
 	@Override
 	public IEval mul(IEval l, IEval r) {
-		return new IEval() {
-
-			@Override
-			public int eval() {
-				return l.eval() * r.eval();
-			}
-		};
+		return () -> l.eval() * r.eval();
 	}
 
 }
